@@ -385,6 +385,7 @@ body.light .sheet{background:#fff}
   <div id="camFail" hidden>
     <svg class="logo" viewBox="0 0 100 100"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6D58A"/><stop offset="1" stop-color="#C9922A"/></linearGradient></defs><circle cx="50" cy="50" r="47" fill="url(#lg)"/><circle cx="50" cy="50" r="38" fill="#0B1B3F"/><circle cx="50" cy="50" r="17" fill="none" stroke="#E8B84A" stroke-width="5"/><circle cx="50" cy="50" r="7" fill="#E8B84A"/><text x="50" y="86" text-anchor="middle" font-size="11" font-weight="800" fill="#E8B84A" font-family="Plus Jakarta Sans,sans-serif">BPG</text></svg>
     <h1 style="color:#fff">BPG Kamera</h1>
+    <a class="btn sm" id="btnFull" hidden target="_blank" rel="noopener" style="color:#3B2600;background:linear-gradient(135deg,#FFE15A,#FFB020);border:0;text-decoration:none;margin-bottom:8px">⤢ Buka skrin penuh (kamera langsung)</a>
     <button class="btn sm" id="btnRetry" style="color:#fff;background:rgba(255,255,255,.14);margin-bottom:6px">↻ Cuba kamera langsung</button><p id="failMsg">Kamera langsung tidak dapat dibuka di sini. Gunakan kamera telefon anda — gambar tetap akan dihias dan disimpan dalam BPG Kamera.</p>
     <div class="row wrap" style="justify-content:center;margin-top:10px">
       <button class="btn gold" id="btnNativeCam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Ambil Gambar</button>
@@ -768,8 +769,10 @@ async function startCam(){
   $('#camFail').hidden=true;document.body.classList.remove('nocam');setZoom(1);buildZooms();
 }
 function stopCam(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null}
+const IN_FRAME=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 function camFail(e){
   $('#camFail').hidden=false;document.body.classList.add('nocam');
+  if(IN_FRAME){const a=$('#btnFull');a.hidden=false;a.href=location.href.split('#')[0];$('#failMsg').textContent='Dalam halaman ini, gunakan butang Ambil Gambar (kamera telefon), atau buka skrin penuh untuk kamera langsung dengan zum, burst & pemasa.';return}
   if(e&&e.name==='NotAllowedError')$('#failMsg').textContent='Akses kamera ditolak. Benarkan kamera dalam tetapan pelayar, atau gunakan kamera telefon di bawah — gambar tetap dihias dan disimpan dalam BPG Kamera.';
 }
 function buildZooms(){
