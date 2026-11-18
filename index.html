@@ -648,6 +648,107 @@ body.light .progchip{color:#4B4BE0}
 #viewer .vb button.liked{color:#FF2D55}
 #wall .wfeed div{flex:none}
 .sharebar .btn{white-space:nowrap;font-size:12.5px;padding:9px 10px}
+
+/* ===== v11: GAYA KORPORAT & MUDAH ===== */
+body.light{--bg:#F4F6FA;--bg2:#fff;--card:#fff;--card2:#EEF2F8;--line:rgba(15,30,61,.10);--text:#0F1E3D;--muted:#5E6B85;--accent:#1F4FB4;--gold:#C9A227;--gold2:#E3C463;--ok:#0E8A5F;--warn:#C77700;--bad:#C62828}
+body.light .view:not(#v-cam){background:#F4F6FA!important}
+body.light h1{background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;color:#0F1E3D!important;font-size:24px!important;letter-spacing:-.01em}
+.eyebrow{display:none}
+body.light .card{border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(15,30,61,.04)}
+body.light .card>h2::before{background:#1F4FB4;width:3px}
+body.light .btn{border-radius:10px;box-shadow:none;border-color:var(--line)}
+body.light .btn.gold{background:#C9A227;color:#fff;text-shadow:none;box-shadow:none}
+body.light .btn.blue{background:#1F4FB4;box-shadow:none}
+body.light .chip{border-radius:8px}
+body.light .chip.on{background:#1F4FB4;color:#fff;box-shadow:none}
+body.light .stat{background:#fff!important;color:var(--text)!important;border:1px solid var(--line)!important;box-shadow:none!important}
+body.light .stat::after{display:none}
+body.light .stat span{color:var(--muted)!important}
+body.light .stat:nth-child(1) b{color:#1F4FB4}body.light .stat:nth-child(2) b{color:#C77700}body.light .stat:nth-child(3) b{color:#0E8A5F}
+body.light .hero{background:#0F2A63!important;box-shadow:none}body.light .hero::after{display:none}
+body.light .livehero{background:#0F2A63;box-shadow:none}
+body.light .livehero .btn{color:#C62828}
+body.light .seg{background:#E6EBF3}
+body.light .progchip{background:#E8EEF9;color:#1F4FB4}
+body.light .newbar{background:#1F4FB4}
+body.light .selbar{background:#0F2A63;box-shadow:0 8px 20px rgba(15,30,61,.25)}
+body.light .kpi{background:#fff!important;color:var(--text);border:1px solid var(--line)}body.light .kpi b{color:#1F4FB4}
+body.light .chhead{background:#0F2A63}
+body.light .chrow .go{background:#1F4FB4}
+body.light .chrow.done .ic{background:#FFF4D6}
+body.light .gsec h4 span{background:#1F4FB4}
+body.light .feat b{background:#E8EEF9!important;color:#1F4FB4!important}
+body.light .qrsh{background:#fff;border:1px solid var(--line)}
+body.light nav{background:#fff;border-top:1px solid var(--line);box-shadow:none}
+body.light nav button.on{color:#1F4FB4}
+body.light nav button.on svg{filter:none}
+nav .fab span{background:#1F4FB4!important;box-shadow:0 6px 16px rgba(31,79,180,.35),0 0 0 5px var(--bg)!important}
+body.light nav .fab span{box-shadow:0 6px 16px rgba(31,79,180,.35),0 0 0 5px #fff!important}
+body.light #splash,#welcome{background:linear-gradient(160deg,#0B1F4D,#1F4FB4)!important}
+body.light .plat.on{border-color:#1F4FB4;background:#E8EEF9}
+/* header atas */
+#apphead{position:fixed;top:0;left:0;right:0;z-index:45;height:calc(58px + var(--sat));padding:var(--sat) 14px 0;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+body:not(.light) #apphead{background:rgba(11,23,48,.94)}
+body.oncam #apphead{display:none}
+#apphead .ahl{display:flex;align-items:center;gap:9px;min-width:0}
+#apphead .ahl svg{width:32px;height:32px;flex:none}
+#apphead .ahl b{display:block;font-size:15px;color:var(--text)}
+#apphead .ahl small{display:block;font-size:11px;color:var(--muted);max-width:44vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#apphead .ahr{display:flex;align-items:center;gap:8px}
+.ahch{display:flex;align-items:center;gap:5px;height:34px;padding:0 12px;border-radius:999px;background:#FFF4D6;color:#7A5A00;font-size:12.5px;font-weight:700;border:1px solid #F1DFA6}
+.ahch b{color:#B58500}
+.ahme .av,.avbtn .av,.me .av,#setAv{background-size:cover!important;background-position:center!important}
+.ahme .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:19px;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--line)}
+.view:not(#v-cam) .pad{padding-top:calc(74px + var(--sat))}
+@media (max-width:380px){.ahch span{display:none}}
+@media (min-width:900px){#apphead{left:92px}}
+/* kamera: bar pilihan pantas */
+#v-cam{--bb:calc(226px + var(--sab))!important}
+.qbar{display:flex;justify-content:center;gap:8px;padding:10px 12px 2px}
+.qbar button{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 4px;border-radius:12px;background:rgba(255,255,255,.08);color:#fff;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,.08)}
+.qbar button i{font-style:normal;font-size:15px}
+.qbar button em{font-style:normal;font-size:10px;color:#FFD60A;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qbar button.on{background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.5)}
+#tStyle,#tFrame{display:none!important}
+.btstrip{position:absolute;left:0;right:0;bottom:var(--bb);padding:14px 14px 12px;background:rgba(0,0,0,.66);backdrop-filter:blur(10px);z-index:5}
+.btstrip .bl{display:flex;gap:8px}
+.btstrip .bl button{flex:1;padding:10px 6px;border-radius:12px;background:rgba(255,255,255,.1);color:#fff;font-weight:700;font-size:12.5px}
+.btstrip .bl button.on{background:#FFD60A;color:#000}
+.btstrip p{color:#ccc;font-size:11.5px;margin:8px 0 0;text-align:center}
+#v-cam.stripopen #zooms{opacity:0;pointer-events:none}
+/* galeri: suis */
+.autoup{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);cursor:pointer}
+.autoup b{display:block;font-size:13.5px}.autoup small{display:block;font-size:11.5px;color:var(--muted)}
+.autoup input{position:absolute;opacity:0;pointer-events:none}
+.autoup .tg{flex:none;width:48px;height:28px;border-radius:99px;background:#C9D1E0;position:relative;transition:.2s}
+.autoup .tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:.2s}
+.autoup input:checked+.tg{background:#0E8A5F}.autoup input:checked+.tg::after{left:23px}
+/* welcome korporat */
+.wcard{border-radius:20px}
+.wcard h2{background:none!important;-webkit-background-clip:initial!important;color:#0F1E3D!important}
+.wtop small{color:#1F4FB4!important}
+.wev{background:#F1F5FC!important}
+.wgo{background:#1F4FB4!important;box-shadow:none!important;border-radius:12px!important}
+.wprev .big{background-size:cover!important;background-position:center!important;box-shadow:0 6px 18px rgba(15,30,61,.18)!important}
+.wprev .big.photo{font-size:0}
+.pbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.pb{padding:7px 12px;border-radius:999px;font-size:12.5px;font-weight:700;background:#E8EEF9;color:#1F4FB4}
+.avgrid button.on{border-color:#1F4FB4!important;background:#E8EEF9!important;box-shadow:none!important}
+.pdpah{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pdpah span{font-size:28px}.pdpah b{display:block;font-size:16px;color:#0F1E3D}.pdpah small{color:#5E6B85;font-size:12px}
+.pdpa{max-height:42vh;overflow:auto;padding:12px 14px;border-radius:12px;background:#F4F6FA;border:1px solid rgba(15,30,61,.1);font-size:12.5px;line-height:1.55;color:#33415C}
+.pdpa h4{margin:10px 0 3px;font-size:12.5px;color:#0F1E3D}.pdpa h4:first-child{margin-top:0}.pdpa p{margin:0}.pdpa ul{margin:2px 0;padding-left:18px}
+.ck{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:13px;color:#0F1E3D;line-height:1.45;cursor:pointer}
+.ck input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:#1F4FB4}
+.ck em{color:#5E6B85;font-style:normal;font-size:11.5px}
+/* swafoto profil */
+#selfie{position:fixed;inset:0;z-index:170;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff}
+#selfie .sv{width:min(78vw,340px);aspect-ratio:1;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 0 0 4px #fff}
+#selfie video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+#selfie .sr{display:flex;gap:26px;align-items:center}
+#selfie .ss{width:74px;height:74px;border-radius:50%;border:4px solid #fff;padding:3px;background:none}
+#selfie .ss i{display:block;width:100%;height:100%;border-radius:50%;background:#fff}
+#selfie .sx{color:#fff;font-weight:600}
 </style>
 </head>
 <body>
@@ -702,7 +803,9 @@ body.light .progchip{color:#4B4BE0}
   </div>
   <div class="fstrip" id="fstrip" hidden></div>
   <div class="frstrip" id="frstrip" hidden></div>
+  <div class="btstrip" id="btstrip" hidden></div>
   <footer class="ios-bot">
+    <div class="qbar" id="qbar"><button data-q="fx"><i>✨</i><span>Kesan</span><em id="qFx">Asli</em></button><button data-q="fr"><i>🖼</i><span>Bingkai</span><em id="qFr">Rasmi</em></button><button data-q="bt"><i>💎</i><span>Cantik AI</span><em id="qBt">Mati</em></button></div>
     <div class="imodes" id="modes"><div class="track" id="modeTrack"></div></div>
     <div class="irow">
       <button class="ithumb" id="lastThumb" aria-label="Galeri"></button>
@@ -717,6 +820,7 @@ body.light .progchip{color:#4B4BE0}
   <div class="pad">
     <div class="row"><div class="grow"><div class="eyebrow">Galeri program</div><h1>Galeri Saya</h1><p class="sub" style="margin:0" id="galSub">Semua gambar program dikongsi bersama</p><span class="progchip" id="galProg"></span></div>
       <button class="btn sm" id="btnSelMode">Pilih</button></div>
+    <label class="autoup"><span class="aut"><b>Kongsi automatik ke Galeri Awam</b><small id="autoUpTxt">Gambar baharu dihantar ke galeri program</small></span><input type="checkbox" id="autoUp"><i class="tg"></i></label>
     <div class="seg" id="galSeg"><button data-seg="semua" class="on">🌐 Semua</button><button data-seg="saya">📱 Saya</button></div>
     <div id="galAll">
       <div class="sharebar">
@@ -878,6 +982,10 @@ body.light .progchip{color:#4B4BE0}
       <label class="f">Tempat acara</label><input class="in" data-s="tempat" placeholder="cth. Bilik Melati 3, Aras 4, BPG">
       <div hidden><button id="btnPin"></button><button id="btnLogout"></button></div>
     </div>
+    <div class="card"><h2>Privasi & PDPA</h2>
+      <p class="sub" style="margin:0 0 10px" id="pdpaStat">—</p>
+      <div class="row"><button class="btn sm grow" id="btnPdpa">Baca Notis Privasi</button><button class="btn sm red grow" id="btnWithdraw">Tarik balik kebenaran galeri</button></div>
+    </div>
     <div class="card"><h2>Data</h2>
       <button class="btn red" id="btnWipe" style="width:100%">Padam semua gambar dalam peranti</button>
       <p class="sub" style="margin:10px 0 0">Gambar yang sudah di Album BPG tidak terjejas. BPG Kamera v1.0 · Bahagian Profesionalisme Guru</p>
@@ -890,18 +998,32 @@ body.light .progchip{color:#4B4BE0}
     <div class="wtop"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#FFB020"/><circle cx="50" cy="50" r="38" fill="#0B1B3F"/><circle cx="50" cy="44" r="15" fill="none" stroke="#FFD25E" stroke-width="6"/><circle cx="50" cy="44" r="6" fill="#FFD25E"/><text x="50" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="#FFD25E" font-family="sans-serif">BPG</text></svg><div><small>BPG KAMERA</small><b>Bahagian Profesionalisme Guru</b></div></div>
     <div class="wev" id="wEv" hidden>Anda menyertai<strong id="wEvName"></strong></div>
     <h2 id="wTitle">Selamat datang! 👋</h2>
-    <p class="sub" style="margin:0 0 10px">Tulis nama atau nickname anda dan pilih ikon. Ia akan dipaparkan pada setiap gambar yang anda kongsi.</p>
-    <div class="wprev"><div class="big" id="wBig">🙂</div><div class="nm" id="wNm">&nbsp;</div></div>
+    <p class="sub" id="wIntro" style="margin:0 0 10px">Ambil swafoto untuk gambar profil, kemudian tulis nama atau nickname anda.</p>
+    <div id="wStep1">
+    <div class="wprev"><div class="big" id="wBig">🙂</div><div class="nm" id="wNm">&nbsp;</div>
+      <div class="pbtns"><button class="pb" id="wSelfie">📷 Swafoto</button><button class="pb" id="wPick">🖼 Pilih gambar</button><button class="pb" id="wNoPhoto" hidden>✕ Guna ikon</button></div></div>
     <label class="f" style="color:#5B6B8C">Nama / Nickname <span style="color:#F03E5E">*</span></label>
     <input class="in" id="wName" maxlength="24" autocomplete="nickname" placeholder="cth. Cikgu Aina">
     <div class="wcount"><span id="wLen">0</span>/24</div>
     <label class="f" style="color:#5B6B8C">Pilih ikon anda</label>
     <div class="avgrid" id="wAv"></div>
     <div class="colors" id="wCol"></div>
-    <button class="wgo" id="wGo" disabled>Mula ambil gambar 📸</button>
+    <button class="wgo" id="wGo" disabled>Seterusnya</button>
+    </div>
+    <div id="wStep2" hidden>
+      <div class="pdpah"><span>🛡️</span><div><b>Notis Privasi & Persetujuan</b><small>Akta Perlindungan Data Peribadi 2010 (PDPA)</small></div></div>
+      <div class="pdpa" id="pdpaTxt"></div>
+      <label class="ck"><input type="checkbox" id="ckPdpa"><span>Saya telah membaca dan <b>bersetuju</b> dengan Notis Privasi di atas. <em>(wajib)</em></span></label>
+      <label class="ck"><input type="checkbox" id="ckPub" checked><span>Saya membenarkan gambar saya <b>dikongsi di Galeri Awam</b> program untuk tontonan peserta. <em>(pilihan — boleh ditukar di Galeri)</em></span></label>
+      <div class="row" style="gap:8px;margin-top:14px"><button class="btn grow" id="wBack">Kembali</button><button class="wgo grow" id="wAgree" disabled style="margin:0">Setuju & Mula</button></div>
+    </div>
     <div class="wnote">Nama disimpan dalam peranti ini sahaja dan boleh ditukar di Tetapan.</div>
   </div>
 </div>
+<header id="apphead">
+  <div class="ahl"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#C9A227"/><circle cx="50" cy="50" r="38" fill="#0F2A63"/><circle cx="50" cy="44" r="15" fill="none" stroke="#E3C463" stroke-width="6"/><circle cx="50" cy="44" r="6" fill="#E3C463"/><text x="50" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="#E3C463" font-family="sans-serif">BPG</text></svg><div><b>BPG Kamera</b><small id="ahProg"></small></div></div>
+  <div class="ahr"><button class="ahch" id="ahCh">🏆 <span>Cabaran</span> <b id="ahStars">0★</b></button><button class="ahme" id="ahMe" aria-label="Profil"><span class="av" id="ahAv">🙂</span></button></div>
+</header>
 <nav id="nav">
   <button data-v="gal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Galeri<i class="ndot" id="galDot" hidden></i></button>
   <button data-v="live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M7.8 16.2a6 6 0 0 1 0-8.4M19 5a10 10 0 0 1 0 14M5 19A10 10 0 0 1 5 5"/></svg>Live<i class="ndot red" id="liveDot" hidden></i></button>
@@ -913,6 +1035,7 @@ body.light .progchip{color:#4B4BE0}
 <input type="file" id="fCapture" accept="image/*" capture="environment" hidden>
 <input type="file" id="fPick" accept="image/*" multiple hidden>
 <input type="file" id="fLogo" accept="image/*" hidden>
+<input type="file" id="fProf" accept="image/*" capture="user" hidden>
 <div id="toast"></div>
 <div id="printArea"></div>
 
@@ -1095,6 +1218,14 @@ function chBadge(b,W,H,id){const C=CHMAP[id];if(!C)return;const fs=Math.max(15,W
   const g=b.createLinearGradient(X,Y,X+w,Y);g.addColorStop(0,'#FFD60A');g.addColorStop(1,'#FF9F0A');b.fillStyle=g;rr(b,X,Y,w,h,h/2);b.fill();b.fillStyle='#2A1A00';b.textBaseline='middle';b.fillText(t,X+fs*.8,Y+h/2+1);b.textBaseline='alphabetic'}
 const STK=['⭐','🎉','👏','❤️','🔥','😎','📸','🏆','🎓','📚','✨','💯','🇲🇾','🙌','🌸','☕','👍','😍','🤩','🎤','💡','🚀','🌟','✅'];
 const RATIO={asal:0,'1:1':1,'4:5':.8,'16:9':16/9,'9:16':9/16,'3:2':1.5};
+const BEAUTY=['Mati','Lembut','Sederhana','Kuat'];
+function beautify(cv,lv){const k=[0,.42,.64,.86][lv]||0;if(!k)return;const W=cv.width,H=cv.height,x=cv.getContext('2d',{willReadFrequently:true});
+  const bl=blurCopy(cv,Math.max(3,Math.round(Math.max(W,H)/420)));const a=x.getImageData(0,0,W,H),d=a.data,e=bl.getContext('2d').getImageData(0,0,W,H).data;
+  for(let i=0;i<d.length;i+=4){const r=d[i],g=d[i+1],b=d[i+2],cb=128-.168736*r-.331264*g+.5*b,cr=128+.5*r-.418688*g-.081312*b;
+    const w=Math.max(0,1-Math.abs(cr-152)/26)*Math.max(0,1-Math.abs(cb-108)/28);if(w<=0)continue;const t=Math.min(1,w*1.6)*k;
+    d[i]=r+(e[i]-r)*t+9*t;d[i+1]=g+(e[i+1]-g)*t+6*t;d[i+2]=b+(e[i+2]-b)*t+5*t}
+  x.putImageData(a,0,0)}
+function beautyCss(lv){return lv?` brightness(${1+lv*.025}) contrast(${1-lv*.03}) saturate(${1+lv*.03})`:''}
 async function compose(src,o,edgeOverride){
   await fontsReady;
   const img=await loadImg(src),k=KUAL[S.kualiti]||KUAL.seimbang,edge=edgeOverride||k.e;
@@ -1105,6 +1236,7 @@ async function compose(src,o,edgeOverride){
   const sc=Math.min(1,edge/Math.max(cw,ch)),W=Math.round(cw*sc),H=Math.round(ch*sc);
   const base=mk(W,H),b=base.getContext('2d',{willReadFrequently:true});
   b.imageSmoothingQuality='high';b.save();b.scale(sc,sc);b.translate(-cx,-cy);b.translate(rw/2,rh/2);b.rotate(rot*Math.PI/180);b.drawImage(img,-iw/2,-ih/2);b.restore();
+  if(o.beauty)beautify(base,o.beauty);
   const P=mergeP(o);
   if(P.b||P.c||P.s||P.w||P.g||P.sep){const d=b.getImageData(0,0,base.width,base.height);adjust(d,P);b.putImageData(d,0,0)}
   if(P.v)vignette(b,base.width,base.height,P.v);
@@ -1122,7 +1254,7 @@ async function compose(src,o,edgeOverride){
 }
 
 /* ================= SIMPAN GAMBAR ================= */
-const newEdits=()=>({filter:S.filter,adj:{b:0,c:0,s:0,w:0},rot:0,crop:'asal',frame:S.frame,stamp:S.stamp});
+const newEdits=()=>({filter:S.filter,adj:{b:0,c:0,s:0,w:0},rot:0,crop:'asal',frame:S.frame,stamp:S.stamp,beauty:S.beauty||0});
 async function addPhoto(blob,opt={}){
   if(needProfile()&&!opt.raw){openWelcome();throw new Error('profil')}
   const t=opt.t||Date.now();
@@ -1273,7 +1405,7 @@ function syncTools(){
   updateFramePreview();$$('.frb').forEach(b=>b.classList.toggle('on',b.dataset.fr===S.frame));$('#tTorch').classList.toggle('on',facing==='user'?!!S.sflash:torchOn);
   renderChPill();
   $('#evName').textContent=curAcara()||'BPG Kamera';
-  $$('.fbtn').forEach(b=>b.classList.toggle('on',b.dataset.f===S.filter));V.style.filter=cssFilter(S.filter);
+  $$('.fbtn').forEach(b=>b.classList.toggle('on',b.dataset.f===S.filter));V.style.filter=(cssFilter(S.filter)==='none'?'':cssFilter(S.filter))+beautyCss(S.beauty||0)||'none';updQbar();
 }
 function buildFilterStrip(u){$('#fstrip').innerHTML=FILTERS.filter(f=>!f.hide).map(f=>`<button class="fbtn ${f.id===S.filter?'on':''}" data-f="${f.id}"><i style="${u?`background:url(${u});filter:${cssFilter(f.id)}`:`background:${f.sw}`}"></i>${f.n}</button>`).join('')}
 async function setLast(pop){const r=PH[0];const el=$('#lastThumb');if(!r){el.style.backgroundImage='';buildFilterStrip();return}if(setLast.u)URL.revokeObjectURL(setLast.u);setLast.u=URL.createObjectURL(r.thumb);el.style.backgroundImage=`url(${setLast.u})`;if(pop===true){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}buildFilterStrip(setLast.u)}
@@ -1358,7 +1490,7 @@ function openEditor(rec){
   const m=document.createElement('div');m.className='modal';
   m.innerHTML=`<div class="mhead"><button class="btn sm" data-e="close">Tutup</button><h3>Sunting</h3><button class="btn sm gold" data-e="save">Simpan</button></div>
   <div class="preview"><img id="edImg" alt=""><div class="spin" id="edSpin"></div></div>
-  <div class="tabs">${[['f','Penapis','<circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/>'],['l','Laras','<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>'],['p','Pangkas','<path d="M6 2v16h16M2 6h16v16"/>'],['b','Bingkai','<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 16h18"/>'],['s','Stiker','<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>'],['i','Info','<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>']].map(([k,n,ic],i)=>`<button data-tab="${k}" class="${i?'':'on'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ic}</svg>${n}</button>`).join('')}</div>
+  <div class="tabs">${[['f','Penapis','<circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/>'],['l','Laras','<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>'],['p','Pangkas','<path d="M6 2v16h16M2 6h16v16"/>'],['b','Bingkai','<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 16h18"/>'],['c','Cantik','<path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.4 7.2 17.9l.9-5.4L4.2 8.7l5.4-.8z"/>'],['s','Stiker','<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>'],['i','Info','<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>']].map(([k,n,ic],i)=>`<button data-tab="${k}" class="${i?'':'on'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ic}</svg>${n}</button>`).join('')}</div>
   <div class="tpanel" id="edPanel"></div>
   <div class="actions"><button class="btn sm" data-e="share">Kongsi</button><button class="btn sm" data-e="dl">Muat turun</button><button class="btn sm" data-e="album">Album BPG</button><button class="btn sm red" data-e="del">Padam</button></div>`;
   document.body.appendChild(m);
@@ -1370,6 +1502,7 @@ function openEditor(rec){
     if(tab==='l')P.innerHTML=[['b','Kecerahan'],['c','Kontras'],['s','Ketepuan'],['w','Suhu warna']].map(([k,n])=>`<div class="sl"><span>${n}</span><input type="range" min="-50" max="50" value="${e.adj[k]||0}" data-adj="${k}"><span id="v_${k}">${e.adj[k]||0}</span></div>`).join('')+`<button class="btn sm" data-reset>Set semula</button>`;
     if(tab==='p')P.innerHTML=`<label class="f" style="margin-top:0">Nisbah</label><div class="scroller">${[['asal','Asal'],['1:1','1:1 Instagram'],['4:5','4:5 Potret'],['16:9','16:9 Skrin'],['9:16','9:16 Story'],['3:2','3:2 Cetak']].map(([v,n])=>`<button class="chip ${v===e.crop?'on':''}" data-cr="${v}">${n}</button>`).join('')}</div><label class="f">Putar</label><div class="row"><button class="btn sm" data-rot="-90">⟲ Kiri</button><button class="btn sm" data-rot="90">⟳ Kanan</button></div>`;
     if(tab==='b')P.innerHTML=`<div class="scroller">${FRAMES.map(([v,n])=>`<button class="chip ${v===e.frame?'on':''}" data-fr="${v}">${n}</button>`).join('')}</div><div class="tog" style="margin-top:8px"><div>Cop tarikh & masa</div><button class="sw ${e.stamp?'on':''}" data-stamp></button></div>`;
+    if(tab==='c')P.innerHTML=`<label class="f" style="margin-top:0">💎 Cantik AI — licin kulit & cerahkan wajah</label><div class="scroller">${BEAUTY.map((n,i)=>`<button class="chip ${(e.beauty||0)===i?'on':''}" data-bt="${i}">${n}</button>`).join('')}</div><p class="sub" style="margin:10px 0 0">Dikesan automatik pada kawasan kulit. Boleh ditukar bila-bila masa.</p>`;
     if(tab==='s'){e.stickers=e.stickers||[];P.innerHTML=`<div class="stkgrid">${STK.map(x=>`<button data-stk="${x}">${x}</button>`).join('')}</div><div class="stklist">${e.stickers.map((k,i)=>`<div class="sk ${i===selStk?'on':''}" data-sks="${i}">${k.e}<button data-skz="${i}|-1">−</button><button data-skz="${i}|1">+</button><button data-skd="${i}">✕</button></div>`).join('')}</div><p class="sub" style="margin:8px 0 0">${e.stickers.length?'Seret pada gambar untuk alihkan stiker terpilih.':'Ketik emoji untuk tampal pada gambar.'}</p>`}
     if(tab==='i')P.innerHTML=`<label class="f" style="margin-top:0">Kapsyen</label><input class="in" data-m="caption" value="${esc(ed.meta.caption)}" placeholder="Tulis kapsyen…"><label class="f">Program</label><input class="in" data-m="acara" value="${esc(ed.meta.acara)}" ${isAdmin()?'':'readonly'}><label class="f">Kategori</label><select class="in" data-m="kategori">${KAT.map(k=>`<option ${k===ed.meta.kategori?'selected':''}>${k}</option>`).join('')}</select><label class="f">Lokasi</label><input class="in" data-m="lokasi" value="${esc(ed.meta.lokasi)}" placeholder="cth. Putrajaya"><label class="f">Jurugambar</label><input class="in" data-m="nama" value="${esc(ed.meta.nama)}"><p class="sub" style="margin-top:10px">Diambil: ${fmtDate(rec.meta.t)}</p>`;
   };
@@ -1394,6 +1527,7 @@ function openEditor(rec){
     if(t.closest('[data-stamp]')){ed.edits.stamp=!ed.edits.stamp;panel();chg()}
     if(t.closest('[data-reset]')){ed.edits.adj={b:0,c:0,s:0,w:0};panel();chg()}
     const sk=t.closest('[data-stk]');if(sk){ed.edits.stickers=ed.edits.stickers||[];ed.edits.stickers.push({e:sk.dataset.stk,x:.5,y:.45,s:.16});selStk=ed.edits.stickers.length-1;panel();chg()}
+    const btc=t.closest('[data-bt]');if(btc&&m.contains(btc)){ed.edits.beauty=+btc.dataset.bt;panel();chg()}
     const sz=t.closest('[data-skz]');if(sz){const [i2,d]=sz.dataset.skz.split('|').map(Number);const k=ed.edits.stickers[i2];k.s=Math.max(.05,Math.min(.6,k.s*(d>0?1.2:.83)));selStk=i2;panel();chg();return}
     const sdel=t.closest('[data-skd]');if(sdel){ed.edits.stickers.splice(+sdel.dataset.skd,1);selStk=-1;panel();chg();return}
     const ss=t.closest('[data-sks]');if(ss){selStk=+ss.dataset.sks;panel()}
@@ -1583,30 +1717,61 @@ if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!navigator.standalone)$('#iosH
 const AVATARS=['🙂','😄','😎','🤓','🥳','😇','🧑‍🏫','👩‍🏫','👨‍🏫','🧕','👩‍🎓','👨‍🎓','📸','🌟','🌸','🌺','🦁','🐯','🐼','🦉','🐬','🚀','🎨','📚'];
 const AVCOL=['linear-gradient(135deg,#FFE15A,#FFB020)','linear-gradient(135deg,#7FB2FF,#2F6BFF)','linear-gradient(135deg,#C3A6FF,#7B5CFF)','linear-gradient(135deg,#FF9FBF,#FF5C8A)','linear-gradient(135deg,#7BEBC6,#12B886)','linear-gradient(135deg,#FFB27A,#FF7A00)'];
 const whoAmI=()=>[S.avatar,S.nama].filter(Boolean).join(' ');
+function paintAv(el,av,bg){if(!el)return;if(S.photo){el.textContent='';el.style.background=`url(${S.photo}) center/cover`}else{el.textContent=av;el.style.background=bg}}
 function renderMe(){
   const av=S.avatar||'🙂',bg=AVCOL[S.avcol||0];
-  $('#meAv').textContent=av;$('#meAv').style.background=bg;$('#meName').textContent=S.nama||'Tetamu';
-  const sa=$('#setAv');if(sa){sa.textContent=av;sa.style.background=bg;$('#setNm').textContent=S.nama||'Belum ditetapkan'}
+  paintAv($('#meAv'),av,bg);paintAv($('#ahAv'),av,bg);$('#meName').textContent=S.nama||'Tetamu';
+  const sa=$('#setAv');if(sa){paintAv(sa,av,bg);$('#setNm').textContent=S.nama||'Belum ditetapkan'}
+  const ap=$('#ahProg');if(ap)ap.textContent=curAcara()||'Bahagian Profesionalisme Guru';
 }
+const PDPA_V=1;
+const PDPA_HTML=`<h4>1. Pengumpulan data</h4><p>Lensa BPG (BPG Kamera) mengumpul <b>nama/nickname</b>, <b>gambar profil</b> (disimpan dalam peranti anda sahaja), <b>gambar yang anda ambil</b> beserta maklumat program, masa dan lokasi (jika anda hidupkan).</p>
+<h4>2. Tujuan</h4><p>Data digunakan semata-mata untuk <b>dokumentasi dan perkongsian aktiviti program</b> Bahagian Profesionalisme Guru (BPG), Kementerian Pendidikan Malaysia.</p>
+<h4>3. Penyimpanan</h4><p>Gambar yang dikongsi disimpan dalam Google Drive pentadbir BPG. Gambar yang tidak dikongsi kekal dalam peranti anda sahaja.</p>
+<h4>4. Siapa boleh melihat</h4><p>Gambar di <b>Galeri Awam</b> boleh dilihat oleh peserta program dan sesiapa yang menerima pautan/QR album. Anda boleh memilih untuk <b>tidak</b> berkongsi pada bila-bila masa.</p>
+<h4>5. Hak anda</h4><ul><li>Menarik balik kebenaran perkongsian (Galeri → suis Kongsi automatik, atau Tetapan → Privasi).</li><li>Memohon gambar anda dipadam daripada Galeri Awam.</li><li>Memadam semua data dalam peranti (Tetapan → Data).</li></ul>
+<h4>6. Hubungi</h4><p>Pentadbir Lensa BPG, Bahagian Profesionalisme Guru, KPM — yahya.karim@moe.gov.my</p>`;
+function selfieCapture(){return new Promise(async res=>{
+  const wasCam=!!stream;stopCam();let st=null;const el=document.createElement('div');el.id='selfie';
+  el.innerHTML=`<div style="font-weight:700">Halakan wajah ke dalam bulatan</div><div class="sv"><video playsinline muted autoplay></video></div><div class="sr"><button class="sx" data-s="x">Batal</button><button class="ss" data-s="go"><i></i></button><button class="sx" data-s="f">Fail</button></div>`;
+  document.body.appendChild(el);const v=$('video',el);
+  const done=r=>{if(st)st.getTracks().forEach(t=>t.stop());el.remove();if(wasCam&&cur==='cam')startCam();res(r)};
+  try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:720},height:{ideal:720}},audio:false});v.srcObject=st;await v.play()}catch(e){done('FILE');return}
+  el.addEventListener('click',e=>{const a=e.target.closest('[data-s]')?.dataset.s;if(!a)return;if(a==='x')done(null);if(a==='f')done('FILE');
+    if(a==='go'){const s0=Math.min(v.videoWidth,v.videoHeight),c=mk(320,320),x=c.getContext('2d');x.translate(320,0);x.scale(-1,1);x.drawImage(v,(v.videoWidth-s0)/2,(v.videoHeight-s0)/2,s0,s0,0,0,320,320);clickSound();done(c.toDataURL('image/jpeg',.85))}});
+})}
+async function fileToAvatar(f){const im=await loadImg(f),s0=Math.min(im.naturalWidth,im.naturalHeight),c=mk(320,320);c.getContext('2d').drawImage(im,(im.naturalWidth-s0)/2,(im.naturalHeight-s0)/2,s0,s0,0,0,320,320);return c.toDataURL('image/jpeg',.85)}
 function openWelcome(edit){
-  const w=$('#welcome');let av=S.avatar||AVATARS[0],col=S.avcol||0;
+  const w=$('#welcome');let av=S.avatar||AVATARS[0],col=S.avcol||0,photo=S.photo||'';
+  $('#wStep1').hidden=false;$('#wStep2').hidden=true;$('#pdpaTxt').innerHTML=PDPA_HTML;
   $('#wAv').innerHTML=AVATARS.map(a=>`<button data-av="${a}" class="${a===av?'on':''}">${a}</button>`).join('');
   $('#wCol').innerHTML=AVCOL.map((c,i)=>`<button data-col="${i}" class="${i===col?'on':''}" style="background:${c}"></button>`).join('');
-  const ev=curAcara();$('#wEv').hidden=!ev;$('#wEvName').innerHTML=esc(ev)+((S.tarikh||S.tempat)?`<span style="display:block;font-size:12.5px;font-weight:600;color:#5B6B8C;margin-top:4px">${S.tarikh?'📅 '+esc(S.tarikh):''}${S.tarikh&&S.tempat?' &nbsp;·&nbsp; ':''}${S.tempat?'📍 '+esc(S.tempat):''}</span>`:'');
-  $('#wTitle').textContent=edit?'Kemas kini profil ✨':'Selamat datang! 👋';
-  $('#wGo').textContent=edit?'Simpan profil ✓':'Mula ambil gambar 📸';
+  const ev=curAcara();$('#wEv').hidden=!ev;$('#wEvName').innerHTML=esc(ev)+((S.tarikh||S.tempat)?`<span style="display:block;font-size:12.5px;font-weight:600;color:#5E6B85;margin-top:4px">${S.tarikh?esc(S.tarikh):''}${S.tarikh&&S.tempat?' &nbsp;·&nbsp; ':''}${S.tempat?esc(S.tempat):''}</span>`:'');
+  $('#wTitle').textContent=edit?'Kemas kini profil':'Selamat datang';
+  const needPdpa=!(S.pdpa&&S.pdpa.v>=PDPA_V);
+  $('#wGo').textContent=(edit&&!needPdpa)?'Simpan profil':'Seterusnya';
   const nm=$('#wName');nm.value=S.nama||'';
-  const upd=()=>{const v=nm.value.trim();$('#wLen').textContent=nm.value.length;$('#wNm').textContent=v||' ';$('#wBig').textContent=av;$('#wBig').style.setProperty('--avbg',AVCOL[col]);$('#wGo').disabled=v.length<2};
+  const upd=()=>{const v=nm.value.trim();$('#wLen').textContent=nm.value.length;$('#wNm').textContent=v||' ';const big=$('#wBig');
+    if(photo){big.textContent='';big.classList.add('photo');big.style.setProperty('--avbg',`url(${photo}) center/cover`);big.style.background=`url(${photo}) center/cover`}else{big.classList.remove('photo');big.textContent=av;big.style.background='';big.style.setProperty('--avbg',AVCOL[col])}
+    $('#wNoPhoto').hidden=!photo;$('#wGo').disabled=v.length<2};
   const pop=()=>{const b=$('#wBig');b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),250)};
   nm.oninput=upd;
-  $('#wAv').onclick=e=>{const b=e.target.closest('[data-av]');if(!b)return;av=b.dataset.av;$$('#wAv button').forEach(x=>x.classList.toggle('on',x===b));upd();pop();try{navigator.vibrate(8)}catch(_){}};
+  $('#wAv').onclick=e=>{const b=e.target.closest('[data-av]');if(!b)return;av=b.dataset.av;photo='';$$('#wAv button').forEach(x=>x.classList.toggle('on',x===b));upd();pop();try{navigator.vibrate(8)}catch(_){}};
   $('#wCol').onclick=e=>{const b=e.target.closest('[data-col]');if(!b)return;col=+b.dataset.col;$$('#wCol button').forEach(x=>x.classList.toggle('on',x===b));upd();pop()};
-  $('#wGo').onclick=()=>{const v=nm.value.trim().replace(/\s+/g,' ');if(v.length<2)return;S.nama=v;S.avatar=av;S.avcol=col;save();renderMe();bindSettings();w.hidden=true;
-    toast(`Hai ${av} ${v}! Selamat bergambar`,2400);if(cur==='cam'&&!stream)startCam()};
+  $('#wSelfie').onclick=async()=>{const r=await selfieCapture();if(r==='FILE'){$('#fProf').click();return}if(r){photo=r;upd();pop()}};
+  $('#wPick').onclick=()=>{$('#fProf').removeAttribute('capture');$('#fProf').click()};
+  $('#fProf').onchange=async e=>{const f=e.target.files[0];e.target.value='';$('#fProf').setAttribute('capture','user');if(!f)return;photo=await fileToAvatar(f);upd();pop()};
+  $('#wNoPhoto').onclick=()=>{photo='';upd()};
+  const finish=()=>{const v=nm.value.trim().replace(/\s+/g,' ');S.nama=v;S.avatar=av;S.avcol=col;S.photo=photo;save();renderMe();bindSettings();w.hidden=true;syncAutoUp();
+    toast(`Hai ${v}! Selamat bergambar`,2200);if(cur==='cam'&&!stream)startCam()};
+  $('#wGo').onclick=()=>{if(nm.value.trim().length<2)return;if(edit&&!needPdpa){finish();return}$('#wStep1').hidden=true;$('#wStep2').hidden=false;$('#ckPdpa').checked=!needPdpa;$('#ckPub').checked=S.autoAlbum!==false;$('#wAgree').disabled=!$('#ckPdpa').checked;$('.wcard',w).scrollIntoView?.()};
+  $('#ckPdpa').onchange=()=>{$('#wAgree').disabled=!$('#ckPdpa').checked};
+  $('#wBack').onclick=()=>{$('#wStep2').hidden=true;$('#wStep1').hidden=false};
+  $('#wAgree').onclick=()=>{if(!$('#ckPdpa').checked)return;S.pdpa={v:PDPA_V,t:Date.now()};S.autoAlbum=$('#ckPub').checked;finish()};
   nm.onkeydown=e=>{if(e.key==='Enter'&&!$('#wGo').disabled)$('#wGo').click()};
-  upd();w.hidden=false;setTimeout(()=>{try{nm.focus()}catch(e){}},350);
+  upd();w.hidden=false;setTimeout(()=>{try{if(!edit)nm.focus()}catch(e){}},350);
 }
-const needProfile=()=>!S.nama||S.nama.trim().length<2;
+const needProfile=()=>!S.nama||S.nama.trim().length<2||!(S.pdpa&&S.pdpa.v>=PDPA_V);
 $('#meChip').onclick=()=>openWelcome(true);
 $('#btnProfile').onclick=()=>openWelcome(true);
 
@@ -1910,6 +2075,23 @@ try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if
 
 const UPG=[['❤️','Suka gambar','Ketik ❤️ pada gambar rakan — kiraan dikongsi semua'],['🌟','Sorotan','Gambar paling disukai dipaparkan di atas galeri'],['📊','Statistik program','Jumlah gambar, peserta, jam paling aktif & jurugambar terbaik'],['🔔','Notifikasi gambar baharu','Titik & bar pemberitahuan bila ada gambar baharu'],['🧠','Amaran gambar kabur','Mengesan gambar kabur sejurus selepas diambil'],['📤','Kongsi pantas sosial','WhatsApp, Telegram, Facebook, X, LinkedIn, TikTok & IG + kapsyen automatik'],['⚡','Muat naik pantas','2 muat naik serentak + cuba semula automatik'],['📺','Dinding Live','Tayangan masa nyata untuk projektor dengan QR sertai'],['📄','Laporan Bergambar PDF','Laporan program A4 automatik daripada gambar anda'],['🌓','Tema automatik','Cerah, Gelap atau ikut tetapan telefon']];
 
+
+/* ================= v11: bar pantas kamera, suis galeri, header, PDPA ================= */
+function updQbar(){const q=$('#qbar');if(!q)return;$('#qFx').textContent=(FMAP[S.filter]||FILTERS[0]).n;$('#qFr').textContent=FRN[S.frame]||'Tiada';$('#qBt').textContent=BEAUTY[S.beauty||0];
+  const open={fx:!$('#fstrip').hidden,fr:!$('#frstrip').hidden,bt:!$('#btstrip').hidden};$$('#qbar [data-q]').forEach(b=>b.classList.toggle('on',open[b.dataset.q]||(b.dataset.q==='bt'&&(S.beauty||0)>0)));
+  $('#v-cam').classList.toggle('stripopen',open.fx||open.fr||open.bt);$('#btstrip').innerHTML=`<div class="bl">${BEAUTY.map((n,i)=>`<button data-bl="${i}" class="${(S.beauty||0)===i?'on':''}">${n}</button>`).join('')}</div><p>💎 Cantik AI: kulit lebih licin & wajah lebih cerah — boleh diubah semula semasa menyunting</p>`}
+$('#qbar').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(!b)return;const k=b.dataset.q,M={fx:'#fstrip',fr:'#frstrip',bt:'#btstrip'};const was=!$(M[k]).hidden;Object.values(M).forEach(x=>$(x).hidden=true);$(M[k]).hidden=was;$('#ctrl').hidden=true;$('#chev').classList.remove('open');$('#v-cam').classList.remove('ctrlopen');syncTools();try{navigator.vibrate(6)}catch(_){}});
+$('#btstrip').addEventListener('click',e=>{const b=e.target.closest('[data-bl]');if(!b)return;S.beauty=+b.dataset.bl;save();syncTools();toast('💎 Cantik AI: '+BEAUTY[S.beauty],1100)});
+function syncAutoUp(){const c=$('#autoUp');if(!c)return;c.checked=S.autoAlbum!==false;$('#autoUpTxt').textContent=c.checked?'Gambar baharu dihantar ke galeri program':'Gambar kekal peribadi dalam peranti anda';
+  const ps=$('#pdpaStat');if(ps)ps.textContent=S.pdpa?`Anda bersetuju dengan Notis Privasi pada ${fmtDate(S.pdpa.t)}. Kongsi ke Galeri Awam: ${S.autoAlbum!==false?'YA':'TIDAK'}.`:'Belum bersetuju.'}
+$('#autoUp').addEventListener('change',async e=>{S.autoAlbum=e.target.checked;save();
+  if(!S.autoAlbum){let n=0;for(const p of PH){if(p.status==='menunggu'){p.status='lokal';await DB.put(p);n++}}refreshStats();if(cur==='gal')renderGal();toast(n?`Dimatikan — ${n} gambar menunggu dibatalkan`:'Gambar baharu tidak akan dikongsi ke Galeri Awam',2200)}
+  else toast('Gambar baharu akan dikongsi ke Galeri Awam',1600);syncAutoUp()});
+$('#ahCh').onclick=()=>chSheet();$('#ahMe').onclick=()=>openWelcome(true);
+$('#btnPdpa').onclick=()=>sheet(`<div class="pdpah"><span>🛡️</span><div><b>Notis Privasi</b><small>Akta Perlindungan Data Peribadi 2010</small></div></div><div class="pdpa">${PDPA_HTML}</div>`);
+$('#btnWithdraw').onclick=async()=>{if(!(await ask('Tarik balik kebenaran?','Gambar baharu tidak akan dikongsi ke Galeri Awam. Untuk memadam gambar yang sudah dikongsi, hubungi pentadbir.','Tarik balik',true)))return;S.autoAlbum=false;save();$('#autoUp').checked=false;$('#autoUp').dispatchEvent(new Event('change'))};
+setInterval(()=>{const a=$('#ahStars');if(a)a.textContent=chStars()+'★'},2000);
+
 /* ================= NAVIGASI ================= */
 let cur='cam';
 function go(v){
@@ -1965,7 +2147,7 @@ document.addEventListener('dragover',e=>e.preventDefault());document.addEventLis
   buildFilterStrip();syncTools();bindSettings();netUI();
   await DB.open();PH=(await DB.all()).sort((a,b)=>b.t-a.t);await loadLogo();setLast();refreshStats();
   renderMe();applyRole();document.body.classList.add('oncam');setTimeout(centerMode,50);
-  buildModes();buildFrameStrip();syncTools();setTimeout(fetchLives,1200);setTimeout(pollNew,4000);
+  buildModes();buildFrameStrip();syncTools();syncAutoUp();$('#ahStars').textContent=chStars()+'★';setTimeout(fetchLives,1200);setTimeout(pollNew,4000);
   $('#upList').innerHTML=UPG.map(w=>`<div class="wow"><b>${w[0]}</b><div>${w[1]}<small>${w[2]}</small></div></div>`).join('');if(S.clap)clapOn(true);if(S.level)levelOn(true);
   $('#wowList').innerHTML=WOW.map(w=>`<div class="wow"><b>${w[0]}</b><div>${w[1]}<small>${w[2]}</small></div></div>`).join('');
   $('#chList2').innerHTML=CH.map(c=>`<div class="wow"><b>${c.i}</b><div>${c.n} <span style="color:#FF9F0A">${'★'.repeat(c.s)}</span><small>${c.d}</small></div></div>`).join('');
