@@ -451,7 +451,9 @@ body:not(.admin) .admin-only{display:none!important}
 #viewer .vb button svg{width:25px;height:25px}
 #viewer .vb button.del{color:#FF453A}
 body.nocam #zooms,body.nocam #ctrl,body.nocam #fstrip,body.nocam #chev{display:none!important}
-body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.admin) nav [data-v=set]{display:none!important}
+body.admin .guest-only{display:none!important}
+.locknote{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);margin-top:6px}
+.in[readonly]{opacity:.75;background:var(--card2)!important;cursor:not-allowed}
 #v-cam.ctrlopen #zooms{opacity:0;pointer-events:none}
 </style>
 </head>
@@ -492,7 +494,7 @@ body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.a
     <button class="cb" id="tGrid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg><span>Grid</span></button>
     <button class="cb" id="tGps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Lokasi</span></button>
     <button class="cb" id="tStyle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg><span>Gaya</span></button>
-    <button class="cb admin-only" id="tFrame"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 16h18"/></svg><span>Bingkai</span></button>
+    <button class="cb" id="tFrame"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 16h18"/></svg><span>Bingkai</span></button>
     <button class="cb" id="tSound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><span>Bunyi</span></button>
   </div>
   <div class="fstrip" id="fstrip" hidden></div>
@@ -524,7 +526,7 @@ body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.a
   <div class="selbar" id="selbar" hidden>
     <button class="btn sm" data-a="share">Kongsi</button>
     <button class="btn sm" data-a="dl">Muat turun</button>
-    <button class="btn sm admin-only" data-a="album">Hantar Album</button>
+    <button class="btn sm" data-a="album">Hantar Album</button>
     <button class="btn sm" data-a="collage">Kolaj</button>
     <button class="btn sm" data-a="slide">Slaid</button>
     <button class="btn sm" data-a="all">Pilih semua</button>
@@ -566,13 +568,13 @@ body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.a
     <div class="card">
       <div id="qrEvWrap" hidden>
         <label class="f" style="margin-top:0">Nama acara</label>
-        <input class="in" id="qrEvName" placeholder="cth. Konvensyen Guru Kebangsaan 2026">
+        <input class="in prog-lock" id="qrEvName" placeholder="cth. Konvensyen Guru Kebangsaan 2026">
         <label class="f">Kategori</label>
         <select class="in" id="qrEvKat"></select>
         <label class="f">Tarikh</label>
-        <input class="in" id="qrEvDate" placeholder="cth. 25 November 2026">
+        <input class="in prog-lock" id="qrEvDate" placeholder="cth. 25 November 2026">
         <label class="f">Tempat</label>
-        <input class="in" id="qrEvPlace" placeholder="cth. Bilik Melati 3, Aras 4, BPG">
+        <input class="in prog-lock" id="qrEvPlace" placeholder="cth. Bilik Melati 3, Aras 4, BPG">
         <p class="sub" style="margin:10px 0 0">Peserta yang mengimbas QR ini akan terus berada dalam acara tersebut — semua gambar mereka dilabel dan masuk ke folder acara yang sama.</p>
       </div>
       <div class="qrbox" id="qrBox"></div>
@@ -599,7 +601,7 @@ body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.a
     <p class="sub">Peribadikan BPG Kamera anda.</p>
     <div class="card"><h2>Profil & acara</h2>
       <div class="row" style="margin-bottom:4px"><div class="me" style="background:none;padding:0;max-width:none"><span class="av" id="setAv" style="width:48px;height:48px;font-size:26px">🙂</span></div><div class="grow"><b id="setNm" style="font-size:16px"></b><small style="display:block;color:var(--muted);font-size:12px">Nama & ikon pada gambar anda</small></div><button class="btn sm blue" id="btnProfile">Tukar</button></div>
-      <label class="f">Acara semasa</label><input class="in" data-s="acara" placeholder="cth. Mesyuarat Pengurusan BPG">
+      <label class="f">Program semasa</label><input class="in prog-lock" data-s="acara" placeholder="cth. Mesyuarat Pengurusan BPG"><div class="locknote guest-only">🔒 Nama program hanya boleh ditukar oleh admin</div>
       <label class="f">Kategori lalai</label><select class="in" data-s="kategori" id="setKat"></select>
     </div>
     <div class="card"><h2>Gambar</h2>
@@ -614,8 +616,8 @@ body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.a
       <div class="tog"><div>Bunyi pengatup<small>Bunyi & getaran semasa ambil gambar</small></div><button class="sw" data-t="bunyi"></button></div>
     </div>
     <div class="card"><h2>Album Bersama BPG</h2>
-      <label class="f" style="margin-top:0">URL Web App (Google Apps Script)</label><input class="in" data-s="albumUrl" placeholder="https://script.google.com/macros/s/…/exec">
-      <label class="f">Kunci album (jika ditetapkan)</label><input class="in" data-s="albumKey" placeholder="Pilihan">
+      <div class="admin-only"><label class="f" style="margin-top:0">URL Web App (Google Apps Script)</label><input class="in" data-s="albumUrl" placeholder="https://script.google.com/macros/s/…/exec">
+      <label class="f">Kunci album (jika ditetapkan)</label><input class="in" data-s="albumKey" placeholder="Pilihan"></div>
       <div class="tog"><div>Hantar automatik<small>Setiap gambar baharu terus ke Album BPG</small></div><button class="sw" data-t="autoAlbum"></button></div>
       <button class="btn sm" id="btnTest" style="margin-top:8px">Uji sambungan</button>
     </div>
@@ -625,7 +627,8 @@ body:not(.admin) nav [data-v=album],body:not(.admin) nav [data-v=qr],body:not(.a
       <p class="sub" id="iosHint" style="margin:10px 0 0" hidden>iPhone: tekan butang Kongsi di Safari → “Add to Home Screen”.</p>
     </div>
     <div class="card"><h2>30 Fungsi BPG Kamera</h2><div id="featList"></div></div>
-    <div class="card"><h2>Admin</h2>
+    <div class="card guest-only"><h2>Admin</h2><p class="sub" style="margin:0 0 10px">Tetapan program (nama, tarikh, tempat) dikawal oleh admin.</p><button class="btn blue" id="btnAdminIn" style="width:100%">🔐 Log masuk admin</button></div>
+    <div class="card admin-only"><h2>Admin · Program</h2><label class="f" style="margin-top:0">Nama program</label><input class="in prog-lock" data-s="acara">
       <label class="f" style="margin-top:0">Tarikh acara</label><input class="in" data-s="tarikh" placeholder="cth. 25 November 2026">
       <label class="f">Tempat acara</label><input class="in" data-s="tempat" placeholder="cth. Bilik Melati 3, Aras 4, BPG">
       <div class="row" style="margin-top:12px"><button class="btn sm grow" id="btnPin">Tukar PIN admin</button><button class="btn sm red grow" id="btnLogout">Keluar mod admin</button></div>
@@ -940,8 +943,10 @@ function setMode(m){S.burst=m==='burst';S.timer=m==='t3'?3:m==='t10'?10:0;save()
 
 /* Sheet acara pantas (kapsyen/acara/kategori/bingkai) */
 function eventSheet(){
+  const A=isAdmin();
   const b=sheet(`<h2>Acara & bingkai</h2>
-  <label class="f" style="margin-top:0">Nama acara</label><input class="in" id="esA" value="${esc(S.acara)}" placeholder="cth. Bengkel Kepimpinan Guru">
+  <label class="f" style="margin-top:0">Nama program</label><input class="in" id="esA" value="${esc(S.acara)}" ${A?'':'readonly'} placeholder="cth. Bengkel Kepimpinan Guru">
+  ${A?'':`<div class="locknote">🔒 Nama program ditetapkan oleh admin${S.tarikh?' · 📅 '+esc(S.tarikh):''}${S.tempat?' · 📍 '+esc(S.tempat):''}</div>`}
   <label class="f">Kategori</label><div class="scroller" id="esK">${KAT.map(k=>`<button class="chip ${k===S.kategori?'on':''}" data-k="${k}">${k}</button>`).join('')}</div>
   <label class="f">Bingkai</label><div class="scroller" id="esF">${[['rasmi','Rasmi BPG'],['minimal','Minimal'],['polaroid','Polaroid'],['tiada','Tiada']].map(([v,n])=>`<button class="chip ${v===S.frame?'on':''}" data-fr="${v}">${n}</button>`).join('')}</div>
   
@@ -949,7 +954,7 @@ function eventSheet(){
   b.addEventListener('click',e=>{const k=e.target.closest('[data-k]'),f=e.target.closest('[data-fr]');
     if(k){$$('#esK .chip',b).forEach(c=>c.classList.toggle('on',c===k))}
     if(f){$$('#esF .chip',b).forEach(c=>c.classList.toggle('on',c===f))}
-    if(e.target.id==='esOk'){S.acara=$('#esA',b).value.trim();S.kategori=$('#esK .on',b)?.dataset.k||S.kategori;S.frame=$('#esF .on',b)?.dataset.fr||S.frame;save();syncTools();bindSettings();b.remove();toast('Disimpan ✓')}
+    if(e.target.id==='esOk'){if(isAdmin())S.acara=$('#esA',b).value.trim();S.kategori=$('#esK .on',b)?.dataset.k||S.kategori;S.frame=$('#esF .on',b)?.dataset.fr||S.frame;save();syncTools();bindSettings();b.remove();toast('Disimpan ✓')}
   });
 }
 
@@ -1026,7 +1031,7 @@ function openEditor(rec){
     if(tab==='l')P.innerHTML=[['b','Kecerahan'],['c','Kontras'],['s','Ketepuan'],['w','Suhu warna']].map(([k,n])=>`<div class="sl"><span>${n}</span><input type="range" min="-50" max="50" value="${e.adj[k]||0}" data-adj="${k}"><span id="v_${k}">${e.adj[k]||0}</span></div>`).join('')+`<button class="btn sm" data-reset>Set semula</button>`;
     if(tab==='p')P.innerHTML=`<label class="f" style="margin-top:0">Nisbah</label><div class="scroller">${[['asal','Asal'],['1:1','1:1 Instagram'],['4:5','4:5 Potret'],['16:9','16:9 Skrin'],['9:16','9:16 Story'],['3:2','3:2 Cetak']].map(([v,n])=>`<button class="chip ${v===e.crop?'on':''}" data-cr="${v}">${n}</button>`).join('')}</div><label class="f">Putar</label><div class="row"><button class="btn sm" data-rot="-90">⟲ Kiri</button><button class="btn sm" data-rot="90">⟳ Kanan</button></div>`;
     if(tab==='b')P.innerHTML=`<div class="scroller">${[['rasmi','Rasmi BPG'],['minimal','Minimal'],['polaroid','Polaroid'],['tiada','Tiada']].map(([v,n])=>`<button class="chip ${v===e.frame?'on':''}" data-fr="${v}">${n}</button>`).join('')}</div><div class="tog" style="margin-top:8px"><div>Cop tarikh & masa</div><button class="sw ${e.stamp?'on':''}" data-stamp></button></div>`;
-    if(tab==='i')P.innerHTML=`<label class="f" style="margin-top:0">Kapsyen</label><input class="in" data-m="caption" value="${esc(ed.meta.caption)}" placeholder="Tulis kapsyen…"><label class="f">Acara</label><input class="in" data-m="acara" value="${esc(ed.meta.acara)}"><label class="f">Kategori</label><select class="in" data-m="kategori">${KAT.map(k=>`<option ${k===ed.meta.kategori?'selected':''}>${k}</option>`).join('')}</select><label class="f">Lokasi</label><input class="in" data-m="lokasi" value="${esc(ed.meta.lokasi)}" placeholder="cth. Putrajaya"><label class="f">Jurugambar</label><input class="in" data-m="nama" value="${esc(ed.meta.nama)}"><p class="sub" style="margin-top:10px">Diambil: ${fmtDate(rec.meta.t)}</p>`;
+    if(tab==='i')P.innerHTML=`<label class="f" style="margin-top:0">Kapsyen</label><input class="in" data-m="caption" value="${esc(ed.meta.caption)}" placeholder="Tulis kapsyen…"><label class="f">Program</label><input class="in" data-m="acara" value="${esc(ed.meta.acara)}" ${isAdmin()?'':'readonly'}><label class="f">Kategori</label><select class="in" data-m="kategori">${KAT.map(k=>`<option ${k===ed.meta.kategori?'selected':''}>${k}</option>`).join('')}</select><label class="f">Lokasi</label><input class="in" data-m="lokasi" value="${esc(ed.meta.lokasi)}" placeholder="cth. Putrajaya"><label class="f">Jurugambar</label><input class="in" data-m="nama" value="${esc(ed.meta.nama)}"><p class="sub" style="margin-top:10px">Diambil: ${fmtDate(rec.meta.t)}</p>`;
   };
   panel();render();
   const close=async()=>{if(dirty&&!(await ask('Buang perubahan?','Perubahan belum disimpan.','Buang',true)))return;if(pu)URL.revokeObjectURL(pu);URL.revokeObjectURL(tu);m.remove()};
@@ -1047,7 +1052,7 @@ function openEditor(rec){
     if(a==='album'){if(dirty)await doSave();queueAlbum([rec])}
     if(a==='del'){if(await ask('Padam gambar ini?','Gambar akan dipadam dari peranti.','Padam',true)){await DB.del(rec.id);PH=PH.filter(p=>p.id!==rec.id);renderGal();setLast();m.remove();toast('Dipadam')}}
   });
-  m.addEventListener('input',e=>{const k=e.target.dataset.adj;if(k){ed.edits.adj[k]=+e.target.value;$('#v_'+k,m).textContent=e.target.value;chg()}const mm=e.target.dataset.m;if(mm){ed.meta[mm]=e.target.value;chg()}});
+  m.addEventListener('input',e=>{const k=e.target.dataset.adj;if(k){ed.edits.adj[k]=+e.target.value;$('#v_'+k,m).textContent=e.target.value;chg()}const mm=e.target.dataset.m;if(mm&&!(mm==='acara'&&!isAdmin())){ed.meta[mm]=e.target.value;chg()}});
 }
 
 /* ================= KOLAJ ================= */
@@ -1133,7 +1138,7 @@ $('#btnAlLoad').onclick=loadAlbum;$('#btnSync').onclick=()=>sync(true);
 let qrMode='app';
 const baseUrl=()=>location.href.split('#')[0].split('?')[0];
 function qrUrl(){if(qrMode==='app')return baseUrl();const n=$('#qrEvName').value.trim();if(!n)return baseUrl();const u=new URL(baseUrl());u.searchParams.set('acara',n);u.searchParams.set('kat',$('#qrEvKat').value);const d=$('#qrEvDate').value.trim(),p=$('#qrEvPlace').value.trim();if(d)u.searchParams.set('tarikh',d);if(p)u.searchParams.set('tempat',p);return u.toString()}
-function qrPrefill(){if(!$('#qrEvName').value&&S.acara){$('#qrEvName').value=S.acara;$('#qrEvDate').value=S.tarikh||'';$('#qrEvPlace').value=S.tempat||'';$('#qrEvKat').value=S.kategori}}
+function qrPrefill(force){if((force||!isAdmin()||!$('#qrEvName').value)&&S.acara){$('#qrEvName').value=S.acara;$('#qrEvDate').value=S.tarikh||'';$('#qrEvPlace').value=S.tempat||'';$('#qrEvKat').value=S.kategori}}
 function drawQR(){const box=$('#qrBox'),url=qrUrl();box.innerHTML='';$('#qrLink').textContent=url;
   if(!window.QRCode){box.innerHTML='<div style="color:#333;padding:30px;width:220px;text-align:center">Penjana QR perlukan internet. Cuba lagi.</div>';return}
   new QRCode(box,{text:url,width:600,height:600,colorDark:'#0B1B3F',colorLight:'#ffffff',correctLevel:url.length>120?QRCode.CorrectLevel.M:QRCode.CorrectLevel.H});}
@@ -1184,7 +1189,7 @@ async function posterPDF(){const b=await poster();if(!b)return null;
   const d=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)});
   const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});pdf.addImage(d,'JPEG',0,0,210,297);return {blob:pdf.output('blob'),ext:'pdf'}}
 $$('[data-qr]').forEach(b=>b.onclick=()=>{qrMode=b.dataset.qr;$$('[data-qr]').forEach(x=>x.classList.toggle('on',x===b));$('#qrEvWrap').hidden=qrMode!=='ev';drawQR()});
-['#qrEvName','#qrEvDate','#qrEvPlace'].forEach(id=>$(id).addEventListener('input',()=>{clearTimeout(drawQR._t);drawQR._t=setTimeout(drawQR,250)}));$('#qrEvKat').onchange=drawQR;
+['#qrEvName','#qrEvDate','#qrEvPlace'].forEach(id=>$(id).addEventListener('input',()=>{clearTimeout(drawQR._t);drawQR._t=setTimeout(drawQR,250)}));$('#qrEvKat').onchange=()=>{if(!isAdmin()){$('#qrEvKat').value=S.kategori;return}drawQR()};
 $('#btnPoster').onclick=async()=>{toast('Menjana poster A4…',1500);const P=await posterPDF();if(!P)return;const b=P.blob;const f=new File([b],`Poster_QR_A4_${slug(qrMode==='ev'?$('#qrEvName').value:'BPG_Kamera')}.${P.ext}`,{type:P.ext==='pdf'?'application/pdf':'image/jpeg'});
   try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Poster QR BPG Kamera'});return}}catch(e){if(e.name==='AbortError')return}download(b,f.name)};
 $('#btnCopy').onclick=async()=>{try{await navigator.clipboard.writeText(qrUrl());toast('Pautan disalin ✓')}catch(e){toast('Salin secara manual: '+qrUrl(),5000)}};
@@ -1205,7 +1210,7 @@ function bindSettings(){
   $('#logoPrev').style.backgroundImage=S.logo?`url(${S.logo})`:'';
   document.body.classList.toggle('light',!!S.light);
 }
-$$('[data-s]').forEach(el=>el.addEventListener('change',()=>{S[el.dataset.s]=el.value.trim();save();syncTools();netUI();if(el.dataset.s==='albumUrl'&&S.albumUrl)sync()}));
+$$('[data-s]').forEach(el=>el.addEventListener('change',()=>{if(['acara','tarikh','tempat','albumUrl','albumKey'].includes(el.dataset.s)&&!isAdmin()){bindSettings();return}S[el.dataset.s]=el.value.trim();save();syncTools();netUI();if(el.dataset.s==='albumUrl'&&S.albumUrl)sync()}));
 $$('[data-t]').forEach(el=>el.addEventListener('click',()=>{const k=el.dataset.t;S[k]=!S[k];save();bindSettings();if(k==='autoAlbum'&&S[k]&&!albumUrl())toast('Isikan URL Album untuk hantar automatik')}));
 $('#btnLogo').onclick=()=>$('#fLogo').click();
 $('#fLogo').onchange=async e=>{const f=e.target.files[0];if(!f)return;const i=await loadImg(f);const s=Math.min(1,512/Math.max(i.naturalWidth,i.naturalHeight));const c=mk(i.naturalWidth*s,i.naturalHeight*s);c.getContext('2d').drawImage(i,0,0,c.width,c.height);S.logo=c.toDataURL('image/png');save();await loadLogo();bindSettings();toast('Logo dikemas kini ✓');e.target.value=''};
@@ -1254,7 +1259,9 @@ $('#btnProfile').onclick=()=>openWelcome(true);
 
 /* ================= PERANAN: TETAMU vs ADMIN ================= */
 const isAdmin=()=>!!S.admin;
-function applyRole(){document.body.classList.toggle('admin',isAdmin());if(!isAdmin()&&['album','qr','set'].includes(cur))go('gal')}
+function applyRole(){const a=isAdmin();document.body.classList.toggle('admin',a);
+  $$('.prog-lock').forEach(el=>{el.readOnly=!a;el.disabled=!a&&el.tagName==='SELECT'?false:el.disabled});
+  if(cur==='qr'){qrPrefill(true);drawQR()}}
 async function sha(t){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return ''}}
 function openAdmin(){
   if(isAdmin()){go('set');return}
@@ -1294,6 +1301,7 @@ function openViewer(list,idx){
 }
 
 
+$('#btnAdminIn').onclick=openAdmin;
 $('#btnLogout').onclick=()=>{S.admin=false;save();applyRole();go('cam');toast('Mod tetamu 👋')};
 $('#btnPin').onclick=()=>{const b=sheet(`<h2>Tukar PIN admin</h2><p class="sub">PIN baharu disimpan dalam peranti ini sahaja.</p><input class="in" id="np1" type="password" placeholder="PIN baharu (min 4)"><div style="height:8px"></div><input class="in" id="np2" type="password" placeholder="Ulang PIN"><button class="btn blue" id="npOk" style="width:100%;margin-top:12px">Simpan PIN</button>`);
   $('#npOk',b).onclick=async()=>{const a=$('#np1',b).value.trim(),c=$('#np2',b).value.trim();if(a.length<4){toast('PIN minimum 4 aksara');return}if(a!==c){toast('PIN tidak sepadan');return}S.pinHash=await sha(a);save();b.remove();toast('PIN admin dikemas kini 🔐')}};
@@ -1301,7 +1309,6 @@ $('#btnPin').onclick=()=>{const b=sheet(`<h2>Tukar PIN admin</h2><p class="sub">
 /* ================= NAVIGASI ================= */
 let cur='cam';
 function go(v){
-  if(!isAdmin()&&['album','qr','set'].includes(v))v='gal';
   cur=v;document.body.classList.toggle('oncam',v==='cam');$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   if(v==='cam')startCam();else stopCam();
   $('#gpsTag').hidden=v!=='cam'||!S.gps||!GPS.text;if(v==='cam')setTimeout(centerMode,30);
@@ -1314,8 +1321,8 @@ $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(b
 $('#shutter').onclick=shoot;
 $('#flipBtn').onclick=async()=>{const vf=$('#vf'),fb=$('#flipBtn');vf.classList.add('flipping');fb.classList.toggle('spin');facing=facing==='user'?'environment':'user';await startCam();setTimeout(()=>vf.classList.remove('flipping'),250)};
 $('#lastThumb').onclick=()=>go('gal');
-$('#evChip').onclick=()=>isAdmin()?eventSheet():eventInfo();
-$('#tFrame').onclick=()=>{if(!isAdmin())return;const F=['rasmi','minimal','polaroid','tiada'],N={rasmi:'Rasmi BPG',minimal:'Minimal',polaroid:'Polaroid',tiada:'Tiada bingkai'};S.frame=F[(F.indexOf(S.frame)+1)%F.length];save();syncTools();toast('Bingkai: '+N[S.frame],1200)};
+$('#evChip').onclick=eventSheet;
+$('#tFrame').onclick=()=>{const F=['rasmi','minimal','polaroid','tiada'],N={rasmi:'Rasmi BPG',minimal:'Minimal',polaroid:'Polaroid',tiada:'Tiada bingkai'};S.frame=F[(F.indexOf(S.frame)+1)%F.length];save();syncTools();toast('Bingkai: '+N[S.frame],1200)};
 $('#chev').onclick=()=>{const c=$('#ctrl'),o=c.hidden;c.hidden=!o;$('#fstrip').hidden=true;$('#chev').classList.toggle('open',o);$('#v-cam').classList.toggle('ctrlopen',o);syncTools()};
 $('#tStyle').onclick=()=>{$('#fstrip').hidden=!$('#fstrip').hidden;syncTools()};
 $('#tSound').onclick=()=>{S.bunyi=!S.bunyi;save();syncTools();toast(S.bunyi?'Bunyi pengatup dihidupkan':'Senyap',1000)};
