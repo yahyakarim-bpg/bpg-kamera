@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#081634">
+<meta name="theme-color" content="#2F6BFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="BPG Kamera">
@@ -24,7 +24,7 @@
   --r:18px;--sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);
   --nav:66px;
 }
-body.light{--bg:#F3F5FB;--bg2:#FFFFFF;--card:#FFFFFF;--card2:#EEF1F8;--line:rgba(11,27,63,.1);--text:#0B1B3F;--muted:#5A6788}
+body.light{--bg:#F5F7FF;--bg2:#FFFFFF;--card:#FFFFFF;--card2:#EEF2FF;--line:rgba(47,107,255,.12);--text:#101B3D;--muted:#5B6B8C;--gold:#FFB020;--gold2:#FFD25E;--accent:#2F6BFF;--ok:#12B886;--warn:#FF9F1C;--bad:#F03E5E}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overscroll-behavior:none}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -107,7 +107,7 @@ body.light nav button.on{color:#B07D10}
 #flashFx.go{animation:fl .35s}
 @keyframes fl{0%{opacity:.85}100%{opacity:0}}
 #countdown{position:absolute;inset:0;display:grid;place-items:center;font-size:120px;font-weight:800;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.6);z-index:8;pointer-events:none}
-#camFail{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background:radial-gradient(circle at 50% 30%,#13306B,#060D1F 70%);z-index:4;color:#fff}
+#camFail{position:absolute;inset:0;padding-bottom:300px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background:radial-gradient(circle at 50% 30%,#13306B,#060D1F 70%);z-index:4;color:#fff}
 #camFail .logo{width:92px;height:92px;margin-bottom:18px}
 #camFail p{color:#B9C6E6;max-width:340px;font-size:14px;line-height:1.5}
 .zslider{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:5}
@@ -276,9 +276,70 @@ body.light .card{box-shadow:0 8px 24px rgba(11,27,63,.06)}
   .selbar{left:110px;right:18px;bottom:18px;width:auto}
   .pad{padding-top:36px}
 }
+
+/* ===== GAYA WARNA CERAH (BRIGHT) ===== */
+body.nocam .zooms,body.nocam .fstrip,body.nocam .toolbar,body.nocam .frame-tag{display:none}
+body.light .view:not(#v-cam){background:
+ radial-gradient(520px 320px at 100% -4%,rgba(123,92,255,.20),transparent 70%),
+ radial-gradient(480px 300px at -8% 2%,rgba(255,176,32,.22),transparent 70%),
+ radial-gradient(520px 340px at 60% 0%,rgba(47,107,255,.14),transparent 70%),#F5F7FF}
+body.light h1{background:linear-gradient(90deg,#101B3D,#2F6BFF 70%,#7B5CFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.light .eyebrow{color:#7B5CFF}
+body.light .card{border-color:rgba(47,107,255,.10);box-shadow:0 10px 30px rgba(47,107,255,.08),0 1px 2px rgba(16,27,61,.04)}
+body.light .card>h2::before{background:linear-gradient(#2F6BFF,#7B5CFF)}
+body.light .btn{background:#fff;border-color:rgba(47,107,255,.16);box-shadow:0 2px 6px rgba(16,27,61,.05)}
+body.light .btn.gold{background:linear-gradient(135deg,#FFC93C,#FF8A00);color:#fff;border:0;box-shadow:0 8px 20px rgba(255,138,0,.30);text-shadow:0 1px 2px rgba(0,0,0,.12)}
+body.light .btn.blue{background:linear-gradient(135deg,#2F6BFF,#7B5CFF);color:#fff;border:0;box-shadow:0 8px 20px rgba(47,107,255,.30)}
+body.light .btn.red{color:#F03E5E}
+body.light .chip{background:#fff;border-color:rgba(47,107,255,.16)}
+body.light .chip.on{background:linear-gradient(135deg,#2F6BFF,#7B5CFF);color:#fff;box-shadow:0 6px 16px rgba(47,107,255,.28)}
+body.light .in{background:#fff;border-color:rgba(47,107,255,.18)}
+body.light .in:focus{border-color:#2F6BFF;box-shadow:0 0 0 4px rgba(47,107,255,.12)}
+body.light .sw.on{background:linear-gradient(135deg,#12B886,#2FD3A0)}
+body.light .stat{border:0;color:#fff;background:linear-gradient(135deg,var(--sc1),var(--sc2));box-shadow:0 10px 24px var(--sh)}
+body.light .stat span{color:rgba(255,255,255,.88)}
+body.light .stat::after{background:#fff;opacity:.18;width:80px;height:80px}
+body.light .stat:nth-child(1){--sc1:#2F6BFF;--sc2:#6A8BFF;--sh:rgba(47,107,255,.28)}
+body.light .stat:nth-child(2){--sc1:#FF8A00;--sc2:#FFC93C;--sh:rgba(255,138,0,.28)}
+body.light .stat:nth-child(3){--sc1:#12B886;--sc2:#3EDBA6;--sh:rgba(18,184,134,.28)}
+body.light .gi{box-shadow:0 6px 16px rgba(16,27,61,.10)}
+body.light .gsec h4 span{background:linear-gradient(135deg,#2F6BFF,#7B5CFF);color:#fff}
+body.light .hero{background:linear-gradient(135deg,#2F6BFF 0%,#7B5CFF 55%,#FF5C8A 100%);box-shadow:0 16px 36px rgba(123,92,255,.30)}
+body.light .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.14)}
+body.light .hero .pill{background:rgba(255,255,255,.2);color:#fff}
+body.light .qrbox{box-shadow:0 12px 30px rgba(47,107,255,.18);border:3px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#2F6BFF,#7B5CFF,#FF5C8A,#FFB020) border-box}
+body.light .feat b{background:linear-gradient(135deg,#2F6BFF,#7B5CFF);color:#fff}
+body.light .feat:nth-child(4n+2) b{background:linear-gradient(135deg,#FF8A00,#FFC93C)}
+body.light .feat:nth-child(4n+3) b{background:linear-gradient(135deg,#12B886,#3EDBA6)}
+body.light .feat:nth-child(4n) b{background:linear-gradient(135deg,#FF5C8A,#FF8FB1)}
+body.light nav{background:rgba(255,255,255,.92);border-top-color:rgba(47,107,255,.10);box-shadow:0 -8px 24px rgba(16,27,61,.06)}
+body.light nav button{color:#7A88A8}
+body.light nav button.on{color:#2F6BFF}
+body.light nav button.on svg{filter:drop-shadow(0 4px 8px rgba(47,107,255,.35))}
+body.light .selbar{background:linear-gradient(135deg,#2F6BFF,#7B5CFF);border:0;box-shadow:0 14px 30px rgba(47,107,255,.35)}
+body.light .selbar .btn{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.25);color:#fff;box-shadow:none}
+body.light #toast{background:#101B3D}
+/* kamera: bingkai luar & panel tanpa kamera yang cerah */
+body.light #camFail{background:radial-gradient(circle at 80% 10%,rgba(255,201,60,.55),transparent 40%),radial-gradient(circle at 10% 80%,rgba(255,92,138,.45),transparent 45%),linear-gradient(160deg,#2F6BFF,#7B5CFF)}
+body.light #camFail p{color:#EEF1FF}
+body.light #camFail .btn.gold{background:linear-gradient(135deg,#FFE15A,#FFB020);color:#3B2600;text-shadow:none}
+body.light .cam-bot{background:linear-gradient(transparent,rgba(16,27,61,.25) 30%,rgba(16,27,61,.7))}
+body.light .shutter{background:conic-gradient(from 200deg,#FFB020,#FF5C8A,#7B5CFF,#2F6BFF,#12B886,#FFB020)}
+body.light .shutter i{border-color:#fff}
+body.light .modes button.on{color:#FFD25E}
+body.light .toolbar .tbtn.on,body.light .tbtn.on{background:linear-gradient(135deg,#FFE15A,#FFB020);color:#3B2600}
+body.light #splash{background:radial-gradient(circle at 80% 10%,rgba(255,201,60,.55),transparent 40%),radial-gradient(circle at 15% 85%,rgba(255,92,138,.45),transparent 45%),linear-gradient(160deg,#2F6BFF,#7B5CFF)}
+body.light #splash p{color:#fff}
+body.light #splash h1,body.light #camFail h1{background:none;-webkit-background-clip:initial;background-clip:initial;color:#fff}
+body.light .modal{background:#F5F7FF}
+body.light .tabs button.on{color:#2F6BFF}
+body.light .fthumb.on img{border-color:#2F6BFF}
+body.light .sheet{background:#fff}
+@media (min-width:900px){body.light nav{border-right:1px solid rgba(47,107,255,.10)}body.light nav button.on{background:linear-gradient(135deg,rgba(47,107,255,.12),rgba(123,92,255,.12))}}
 </style>
 </head>
 <body>
+<script>try{var _s=JSON.parse(localStorage.getItem("bpgk_s")||"{}");if(!_s.v3||_s.light!==false)document.body.classList.add("light")}catch(e){document.body.classList.add("light")}</script>
 <div id="splash"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#E8B84A"/><circle cx="50" cy="50" r="38" fill="#0B1B3F"/><circle cx="50" cy="44" r="15" fill="none" stroke="#F6D58A" stroke-width="6"/><circle cx="50" cy="44" r="6" fill="#F6D58A"/><text x="50" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="#F6D58A" font-family="sans-serif">BPG</text></svg><h1>BPG Kamera</h1><p>BAHAGIAN PROFESIONALISME GURU</p><div class="bar"><i></i></div></div>
 
 <!-- ============ KAMERA ============ -->
@@ -290,11 +351,11 @@ body.light .card{box-shadow:0 8px 24px rgba(11,27,63,.06)}
   <div id="camFail" hidden>
     <svg class="logo" viewBox="0 0 100 100"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6D58A"/><stop offset="1" stop-color="#C9922A"/></linearGradient></defs><circle cx="50" cy="50" r="47" fill="url(#lg)"/><circle cx="50" cy="50" r="38" fill="#0B1B3F"/><circle cx="50" cy="50" r="17" fill="none" stroke="#E8B84A" stroke-width="5"/><circle cx="50" cy="50" r="7" fill="#E8B84A"/><text x="50" y="86" text-anchor="middle" font-size="11" font-weight="800" fill="#E8B84A" font-family="Plus Jakarta Sans,sans-serif">BPG</text></svg>
     <h1 style="color:#fff">BPG Kamera</h1>
-    <p id="failMsg">Kamera langsung tidak dapat dibuka di sini. Gunakan kamera telefon anda — gambar tetap akan dihias dan disimpan dalam BPG Kamera.</p>
+    <button class="btn sm" id="btnRetry" style="color:#fff;background:rgba(255,255,255,.14);margin-bottom:6px">↻ Cuba kamera langsung</button><p id="failMsg">Kamera langsung tidak dapat dibuka di sini. Gunakan kamera telefon anda — gambar tetap akan dihias dan disimpan dalam BPG Kamera.</p>
     <div class="row wrap" style="justify-content:center;margin-top:10px">
       <button class="btn gold" id="btnNativeCam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Ambil Gambar</button>
       <button class="btn" id="btnPick" style="color:#fff;background:rgba(255,255,255,.1)">Pilih dari Galeri</button>
-      <button class="btn sm" id="btnRetry" style="color:#B9C6E6">Cuba kamera langsung</button>
+      
     </div>
   </div>
   <div class="cam-top">
@@ -432,7 +493,7 @@ body.light .card{box-shadow:0 8px 24px rgba(11,27,63,.06)}
       <button class="btn sm" id="btnTest" style="margin-top:8px">Uji sambungan</button>
     </div>
     <div class="card"><h2>Paparan</h2>
-      <div class="tog"><div>Tema cerah</div><button class="sw" data-t="light"></button></div>
+      <div class="tog"><div>Tema cerah (warna terang)<small>Matikan untuk tema gelap</small></div><button class="sw" data-t="light"></button></div>
       <button class="btn gold" id="btnInstall" style="width:100%;margin-top:10px" hidden>Pasang ke Skrin Utama</button>
       <p class="sub" id="iosHint" style="margin:10px 0 0" hidden>iPhone: tekan butang Kongsi di Safari → “Add to Home Screen”.</p>
     </div>
@@ -462,7 +523,7 @@ body.light .card{box-shadow:0 8px 24px rgba(11,27,63,.06)}
 'use strict';
 /* ================= KONFIGURASI ================= */
 const CONFIG = {
-  ALBUM_URL: '',            // Tampal URL Web App Apps Script di sini (atau isi di Tetapan)
+  ALBUM_URL: 'https://script.google.com/macros/s/AKfycbw5-1_jiXv1dg439lu6orkvxn3nZb_e7-TRyL5VpWGye89fvm2mezipVHLAbZZRnh2fnA/exec',            // Tampal URL Web App Apps Script di sini (atau isi di Tetapan)
   ALBUM_KEY: '',            // Kunci album jika ditetapkan dalam Code.gs
 };
 
@@ -472,8 +533,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LS={get(k,d){try{const v=localStorage.getItem('bpgk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('bpgk_'+k,JSON.stringify(v))}catch(e){}}};
-const DEF={nama:'',acara:'',kategori:'Program',kualiti:'seimbang',albumUrl:'',albumKey:'',logo:'',light:false,bunyi:true,autoAlbum:true,frame:'rasmi',stamp:true,gps:false,grid:false,timer:0,burst:false,filter:'asli'};
+const DEF={nama:'',acara:'',kategori:'Program',kualiti:'seimbang',albumUrl:'',albumKey:'',logo:'',light:true,bunyi:true,autoAlbum:true,frame:'rasmi',stamp:true,gps:false,grid:false,timer:0,burst:false,filter:'asli'};
 const S=Object.assign({},DEF,LS.get('s',{}));
+if(!S.v3){S.light=true;S.v3=1;try{localStorage.setItem('bpgk_s',JSON.stringify(S))}catch(e){}}
 const save=()=>LS.set('s',S);
 const KAT=['Program','Mesyuarat','Kursus','Bengkel','Lawatan','Majlis','Sukan','Lain-lain'];
 const KUAL={tinggi:{e:2560,q:.92},seimbang:{e:1920,q:.86},jimat:{e:1280,q:.76}};
@@ -650,11 +712,11 @@ async function startCam(){
   V.srcObject=stream;V.classList.toggle('mirror',facing==='user');try{await V.play()}catch(e){}
   track=stream.getVideoTracks()[0];try{caps=track.getCapabilities?track.getCapabilities():{}}catch(e){caps={}}
   $('#tTorch').hidden=!caps.torch;torchOn=false;$('#tTorch').classList.remove('on');
-  $('#camFail').hidden=true;setZoom(1);buildZooms();
+  $('#camFail').hidden=true;document.body.classList.remove('nocam');setZoom(1);buildZooms();
 }
 function stopCam(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null}
 function camFail(e){
-  $('#camFail').hidden=false;
+  $('#camFail').hidden=false;document.body.classList.add('nocam');
   if(e&&e.name==='NotAllowedError')$('#failMsg').textContent='Akses kamera ditolak. Benarkan kamera dalam tetapan pelayar, atau gunakan kamera telefon di bawah — gambar tetap dihias dan disimpan dalam BPG Kamera.';
 }
 function buildZooms(){
