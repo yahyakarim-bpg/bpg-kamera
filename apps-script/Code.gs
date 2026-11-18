@@ -9,7 +9,7 @@
 
 const FOLDER_ID = '';   // Kosongkan untuk auto-cipta folder "BPG Kamera - Album" dalam Drive anda
 const KUNCI     = '';   // Pilihan: kunci ringkas supaya hanya warga BPG boleh hantar/lihat
-const HAD_SENARAI = 60; // Bilangan gambar terkini dipaparkan dalam tab Album
+const HAD_SENARAI = 300; // Bilangan gambar terkini dipaparkan dalam tab Album
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
@@ -18,7 +18,7 @@ function doGet(e) {
       if (KUNCI && p.key !== KUNCI) return json_({ ok: false, error: 'Kunci album tidak sah' });
       return json_({ ok: true, items: senarai_(p.acara || '') });
     }
-    return json_({ ok: true, app: 'BPG Kamera API', versi: '1.0' });
+    return json_({ ok: true, app: 'BPG Kamera API', versi: '1.1' });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
   }
@@ -49,7 +49,8 @@ function muatNaik_(d) {
   const f = folder.createFile(blob);
   f.setDescription(JSON.stringify({
     acara: m.acara || '', kategori: m.kategori || '', nama: m.nama || '',
-    caption: m.caption || '', lokasi: m.lokasi || '', t: m.t || Date.now()
+    caption: m.caption || '', lokasi: m.lokasi || '', t: m.t || Date.now(),
+    cabaran: m.cabaran || '', tarikh: m.tarikh || '', tempat: m.tempat || ''
   }));
   try { f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); }
   catch (x) {
@@ -115,13 +116,13 @@ function log_(f, m) {
     if (id) { try { ss = SpreadsheetApp.openById(id); } catch (x) {} }
     if (!ss) {
       ss = SpreadsheetApp.create('BPG Kamera - Log Gambar');
-      ss.getSheets()[0].appendRow(['Masa terima', 'Acara', 'Kategori', 'Jurugambar', 'Kapsyen', 'Lokasi', 'Masa gambar', 'Pautan']);
+      ss.getSheets()[0].appendRow(['Masa terima', 'Acara', 'Kategori', 'Jurugambar', 'Kapsyen', 'Lokasi', 'Masa gambar', 'Pautan', 'Cabaran']);
       ss.getSheets()[0].setFrozenRows(1);
       DriveApp.getFileById(ss.getId()).moveTo(akar_());
       props.setProperty('SHEET', ss.getId());
     }
     ss.getSheets()[0].appendRow([new Date(), m.acara || '', m.kategori || '', m.nama || '', m.caption || '',
-      m.lokasi || '', m.t ? new Date(m.t) : '', f.getUrl()]);
+      m.lokasi || '', m.t ? new Date(m.t) : '', f.getUrl(), m.cabaran || '']);
   } catch (x) { console.warn(x); }
 }
 
