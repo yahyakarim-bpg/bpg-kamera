@@ -551,6 +551,7 @@ body:not(.light) .seg button.on{background:var(--card)}
 .wow{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
 .wow b{font-size:20px}.wow small{display:block;color:var(--muted);font-size:12px}
 #v-cam .izoom{bottom:max(72px,calc(15% + 14px))}
+.guest-only,.locknote{display:none!important}
 </style>
 </head>
 <body>
@@ -748,10 +749,10 @@ body:not(.light) .seg button.on{background:var(--card)}
     <div class="card"><h2>10 Fungsi Gempak 🔥</h2><div id="wowList"></div></div>
     <div class="card"><h2>10 Cabaran Shoot 🏆</h2><div id="chList2"></div></div>
     <div class="card guest-only"><h2>Admin</h2><p class="sub" style="margin:0 0 10px">Tetapan program (nama, tarikh, tempat) dikawal oleh admin.</p><button class="btn blue" id="btnAdminIn" style="width:100%">🔐 Log masuk admin</button></div>
-    <div class="card admin-only"><h2>Admin · Program</h2><label class="f" style="margin-top:0">Nama program</label><input class="in prog-lock" data-s="acara">
+    <div class="card"><h2>Tarikh & tempat program</h2>
       <label class="f" style="margin-top:0">Tarikh acara</label><input class="in" data-s="tarikh" placeholder="cth. 25 November 2026">
       <label class="f">Tempat acara</label><input class="in" data-s="tempat" placeholder="cth. Bilik Melati 3, Aras 4, BPG">
-      <div class="row" style="margin-top:12px"><button class="btn sm grow" id="btnPin">Tukar PIN admin</button><button class="btn sm red grow" id="btnLogout">Keluar mod admin</button></div>
+      <div hidden><button id="btnPin"></button><button id="btnLogout"></button></div>
     </div>
     <div class="card"><h2>Data</h2>
       <button class="btn red" id="btnWipe" style="width:100%">Padam semua gambar dalam peranti</button>
@@ -835,7 +836,7 @@ const URL_TARIKH=qp.get('tarikh')||'',URL_TEMPAT=qp.get('tempat')||'';
 if(!URL_ACARA&&location.hash.startsWith('#acara-')){URL_ACARA=decodeURIComponent(location.hash.slice(7)).replace(/-/g,' ')}
 if(URL_ACARA){S.acara=URL_ACARA;S.tarikh=URL_TARIKH;S.tempat=URL_TEMPAT;if(URL_KAT&&KAT.includes(URL_KAT))S.kategori=URL_KAT;save()}
 else if(!S.acara&&CONFIG.EVENT){const E=CONFIG.EVENT;S.acara=E.acara;S.tarikh=E.tarikh;S.tempat=E.tempat;if(KAT.includes(E.kat))S.kategori=E.kat;save()}
-if(qp.has('admin'))setTimeout(()=>openAdmin(),1300);
+
 const curAcara=()=>S.acara.trim();
 
 /* ================= PANGKALAN DATA (IndexedDB) ================= */
@@ -1483,13 +1484,13 @@ $('#btnProfile').onclick=()=>openWelcome(true);
 
 
 /* ================= PERANAN: TETAMU vs ADMIN ================= */
-const isAdmin=()=>!!S.admin;
+const isAdmin=()=>true; // mod admin dibuang: semua pengguna akses penuh
 function applyRole(){const a=isAdmin();document.body.classList.toggle('admin',a);
   $$('.prog-lock').forEach(el=>{el.readOnly=!a;el.disabled=!a&&el.tagName==='SELECT'?false:el.disabled});
   if(cur==='qr'){qrPrefill(true);drawQR()}}
 async function sha(t){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return ''}}
 function openAdmin(){
-  if(isAdmin()){go('set');return}
+  {return}
   const b=sheet(`<h2>🔐 Mod Admin</h2><p class="sub">Masukkan PIN admin untuk akses Album, QR & Tetapan.</p><input class="in" id="apin" type="password" autocomplete="off" placeholder="PIN admin" style="text-align:center;font-size:20px;letter-spacing:.3em"><div id="aerr" style="color:var(--bad);font-size:13px;min-height:18px;margin:8px 0;text-align:center"></div><div class="row"><button class="btn grow" data-x="0">Batal</button><button class="btn blue grow" data-x="1">Buka</button></div>`);
   const inp=$('#apin',b);setTimeout(()=>inp.focus(),300);
   const tryIt=async()=>{const h=await sha(inp.value.trim());if(h&&h===(S.pinHash||CONFIG.ADMIN_PIN_HASH)){S.admin=true;save();applyRole();b.remove();toast('Mod admin aktif 🔓');go('set')}else{$('#aerr',b).textContent='PIN tidak tepat';inp.value='';try{navigator.vibrate([30,40,30])}catch(_){}}};
