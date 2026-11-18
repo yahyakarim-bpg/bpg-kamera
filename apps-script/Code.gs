@@ -18,7 +18,8 @@ function doGet(e) {
       if (KUNCI && p.key !== KUNCI) return json_({ ok: false, error: 'Kunci album tidak sah' });
       return json_({ ok: true, items: senarai_(p.acara || '') });
     }
-    return json_({ ok: true, app: 'BPG Kamera API', versi: '1.1' });
+    if (p.action === 'live_list') return json_({ ok: true, items: liveList_(p.acara || '') });
+    return json_({ ok: true, app: 'BPG Kamera API', versi: '1.2' });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
   }
@@ -29,6 +30,9 @@ function doPost(e) {
     const d = JSON.parse(e.postData.contents);
     if (KUNCI && d.key !== KUNCI) return json_({ ok: false, error: 'Kunci album tidak sah' });
     if (d.action === 'upload') return json_(muatNaik_(d));
+    if (d.action === 'like') return json_(suka_(d));
+    if (d.action === 'live_start') return json_(liveStart_(d));
+    if (d.action === 'live_stop') return json_(liveStop_(d));
     return json_({ ok: false, error: 'Tindakan tidak dikenali' });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
@@ -90,6 +94,8 @@ function senarai_(acara) {
       });
     }
   });
+  const L = jsonProp_('LIKES', {});
+  out.forEach(o => { o.likes = L[o.id] || 0; });
   out.sort((a, b) => b.t - a.t);
   return out.slice(0, HAD_SENARAI);
 }
@@ -125,6 +131,44 @@ function log_(f, m) {
       m.lokasi || '', m.t ? new Date(m.t) : '', f.getUrl(), m.cabaran || '']);
   } catch (x) { console.warn(x); }
 }
+
+/* ---------- Suka (like) ---------- */
+function suka_(d) {
+  if (!d.id) throw new Error('Tiada id');
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try {
+    const L = jsonProp_('LIKES', {});
+    L[d.id] = Math.max(0, (L[d.id] || 0) + (Number(d.d) < 0 ? -1 : 1));
+    setJsonProp_('LIKES', L);
+    return { ok: true, likes: L[d.id] };
+  } finally { lock.releaseLock(); }
+}
+
+/* ---------- BPG LIVE (hab siaran) ---------- */
+const LIVE_TTL = 6 * 3600 * 1000; // siaran tamat sendiri selepas 6 jam
+function liveList_(acara) {
+  const now = Date.now();
+  return jsonProp_('LIVES', []).filter(x => now - x.t < LIVE_TTL && (!acara || x.acara === acara)).sort((a, b) => b.t - a.t);
+}
+function liveStart_(d) {
+  if (!/^https?:\/\//i.test(d.url || '')) throw new Error('Pautan siaran tidak sah');
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try {
+    const now = Date.now();
+    const arr = jsonProp_('LIVES', []).filter(x => now - x.t < LIVE_TTL && x.url !== d.url);
+    const it = { id: Utilities.getUuid().slice(0, 8), t: now, acara: bersih_(d.acara), nama: String(d.nama || '').slice(0, 40),
+                 title: String(d.title || 'LIVE').slice(0, 90), url: String(d.url).slice(0, 400), platform: String(d.platform || 'lain').slice(0, 12) };
+    arr.push(it); setJsonProp_('LIVES', arr.slice(-40));
+    return { ok: true, id: it.id };
+  } finally { lock.releaseLock(); }
+}
+function liveStop_(d) {
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try { setJsonProp_('LIVES', jsonProp_('LIVES', []).filter(x => x.id !== d.id)); return { ok: true }; }
+  finally { lock.releaseLock(); }
+}
+function jsonProp_(k, def) { try { return JSON.parse(PropertiesService.getScriptProperties().getProperty(k) || '') || def; } catch (e) { return def; } }
+function setJsonProp_(k, v) { PropertiesService.getScriptProperties().setProperty(k, JSON.stringify(v)); }
 
 function bersih_(s) { return String(s || '').replace(/[\\/:*?"<>|]/g, ' ').trim().slice(0, 80); }
 
