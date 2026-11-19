@@ -19,7 +19,7 @@ function doGet(e) {
       return json_({ ok: true, items: senarai_(p.acara || '') });
     }
     if (p.action === 'live_list') return json_({ ok: true, items: liveList_(p.acara || '') });
-    return json_({ ok: true, app: 'BPG Kamera API', versi: '1.2' });
+    return json_({ ok: true, app: 'BPG Kamera API', versi: '1.3' });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
   }
@@ -31,6 +31,7 @@ function doPost(e) {
     if (KUNCI && d.key !== KUNCI) return json_({ ok: false, error: 'Kunci album tidak sah' });
     if (d.action === 'upload') return json_(muatNaik_(d));
     if (d.action === 'like') return json_(suka_(d));
+    if (d.action === 'delete') return json_(padam_(d));
     if (d.action === 'live_start') return json_(liveStart_(d));
     if (d.action === 'live_stop') return json_(liveStop_(d));
     return json_({ ok: false, error: 'Tindakan tidak dikenali' });
@@ -54,7 +55,8 @@ function muatNaik_(d) {
   f.setDescription(JSON.stringify({
     acara: m.acara || '', kategori: m.kategori || '', nama: m.nama || '',
     caption: m.caption || '', lokasi: m.lokasi || '', t: m.t || Date.now(),
-    cabaran: m.cabaran || '', tarikh: m.tarikh || '', tempat: m.tempat || ''
+    cabaran: m.cabaran || '', tarikh: m.tarikh || '', tempat: m.tempat || '',
+    own: m.owner ? hash_(m.owner) : ''
   }));
   try { f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); }
   catch (x) {
@@ -85,6 +87,7 @@ function senarai_(acara) {
       const f = fi.next(); n++;
       let meta = {};
       try { meta = JSON.parse(f.getDescription() || '{}'); } catch (x) {}
+      delete meta.own;
       const id = f.getId();
       out.push({
         id: id, name: f.getName(), t: f.getDateCreated().getTime(),
@@ -180,4 +183,23 @@ function json_(o) {
 function sediakan() {
   const r = akar_();
   Logger.log('Folder album: ' + r.getUrl());
+}
+
+// v1.3 — pemilik boleh tarik balik gambar sendiri dari Galeri Awam
+function hash_(t) {
+  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(t))
+    .map(b => ('0' + (b & 255).toString(16)).slice(-2)).join('');
+}
+function padam_(d) {
+  if (!d.id || !d.owner) return { ok: false, error: 'Maklumat tidak lengkap' };
+  let f;
+  try { f = DriveApp.getFileById(d.id); } catch (e) { return { ok: false, error: 'Gambar tiada' }; }
+  let meta = {};
+  try { meta = JSON.parse(f.getDescription() || '{}'); } catch (x) {}
+  if (!meta.own) return { ok: false, error: 'Gambar lama — hubungi pentadbir untuk dibuang' };
+  if (meta.own !== hash_(d.owner)) return { ok: false, error: 'Bukan gambar anda' };
+  f.setTrashed(true);
+  const L = jsonProp_('LIKES', {});
+  if (L[d.id]) { delete L[d.id]; setJsonProp_('LIKES', L); }
+  return { ok: true };
 }

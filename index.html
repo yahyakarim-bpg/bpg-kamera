@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <style>
 :root{
   --bg:#060D1F;--bg2:#0B1730;--card:rgba(255,255,255,.055);--card2:rgba(255,255,255,.09);
@@ -749,6 +750,45 @@ body.oncam #apphead{display:none}
 #selfie .ss{width:74px;height:74px;border-radius:50%;border:4px solid #fff;padding:3px;background:none}
 #selfie .ss i{display:block;width:100%;height:100%;border-radius:50%;background:#fff}
 #selfie .sx{color:#fff;font-weight:600}
+
+/* ===== v12: mesra pengguna ===== */
+#viewer~.sheet-bg{z-index:95}
+.ahhelp{width:34px;height:34px;border-radius:50%;background:#E8EEF9;color:#1F4FB4;font-weight:800;font-size:16px}
+body:not(.light) .ahhelp{background:rgba(255,255,255,.12);color:#fff}
+#upbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:300;pointer-events:none;opacity:0;transition:opacity .3s}
+#upbar.on{opacity:1}#upbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1F4FB4,#0E8A5F);transition:width .3s}
+#offbar{position:fixed;left:12px;right:12px;top:calc(64px + var(--sat));z-index:60;padding:9px 12px;border-radius:12px;background:#3A3A3C;color:#fff;font-size:12.5px;font-weight:600;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+#ptr{position:fixed;left:50%;top:calc(66px + var(--sat));transform:translate(-50%,-60px);z-index:44;padding:7px 14px;border-radius:999px;background:#1F4FB4;color:#fff;font-size:12px;font-weight:700;transition:transform .2s;pointer-events:none}
+#ptr.show{transform:translate(-50%,0)}#ptr.go{background:#0E8A5F}
+.gi.sk{background:linear-gradient(100deg,var(--card2) 30%,#fff 50%,var(--card2) 70%);background-size:300% 100%;animation:shim 1.2s infinite}
+@keyframes shim{from{background-position:100% 0}to{background-position:0 0}}
+.qprev{position:absolute;left:14px;bottom:calc(var(--bb) + 12px);z-index:7;display:flex;align-items:center;gap:10px;padding:8px;border-radius:16px;background:rgba(28,28,30,.92);backdrop-filter:blur(12px);animation:up .25s}
+.qpt{width:54px;height:54px;border-radius:10px;background:#333 center/cover}
+.qpa{display:flex;gap:6px}
+.qpa button{padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;font-size:12.5px;font-weight:700}
+.qpa button.r{color:#FF6961}
+.pausepane{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(0,0,0,.78);color:#fff;font-family:inherit}
+.pausepane b{font-size:44px}.pausepane span{font-weight:700;font-size:15px}.pausepane small{opacity:.75}
+#toast.act{display:flex;align-items:center;gap:12px;pointer-events:auto}
+#toast button{background:#FFD60A;color:#000;border-radius:8px;padding:6px 10px;font-weight:800;font-size:13px}
+.heart{position:absolute;left:50%;top:50%;font-size:96px;transform:translate(-50%,-50%) scale(.2);opacity:0;pointer-events:none;animation:hrt .8s ease forwards;z-index:3;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4))}
+@keyframes hrt{30%{transform:translate(-50%,-50%) scale(1.15);opacity:1}60%{transform:translate(-50%,-50%) scale(.95);opacity:1}100%{transform:translate(-50%,-70%) scale(1);opacity:0}}
+body.big .view:not(#v-cam),body.big .sheet,body.big .modal,body.big #apphead,body.big nav{zoom:1.12}
+.faq details{border-bottom:1px solid var(--line);padding:12px 2px}
+.faq summary{font-weight:700;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+.faq summary::after{content:"+";color:var(--accent);font-size:18px}.faq details[open] summary::after{content:"–"}
+.faq p{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
+.tour{text-align:center;padding:4px 4px 0}
+.tour .ti{width:96px;height:96px;border-radius:28px;margin:4px auto 14px;display:grid;place-items:center;font-size:48px;background:#E8EEF9}
+.tour h2{font-size:20px;margin:0 0 6px}.tour p{color:var(--muted);font-size:14px;line-height:1.5;margin:0 0 14px}
+.dots{display:flex;justify-content:center;gap:6px;margin:4px 0 14px}.dots i{width:8px;height:8px;border-radius:4px;background:var(--line);transition:width .2s}.dots i.on{width:22px;background:#1F4FB4}
+#scanner{position:fixed;inset:0;z-index:170;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff}
+#scanner .sv{position:relative;width:min(80vw,360px);aspect-ratio:1;border-radius:24px;overflow:hidden}
+#scanner video{width:100%;height:100%;object-fit:cover}
+#scanner .sv::after{content:"";position:absolute;inset:14%;border:3px solid #FFD60A;border-radius:18px;box-shadow:0 0 0 999px rgba(0,0,0,.35)}
+#scanner .line{position:absolute;left:16%;right:16%;height:2px;background:#FFD60A;top:20%;animation:scan 1.8s ease-in-out infinite alternate;z-index:2}
+@keyframes scan{to{top:80%}}
+.empty .btn{margin-top:14px}
 </style>
 </head>
 <body>
@@ -772,9 +812,11 @@ body.oncam #apphead{display:none}
     <div id="sflash"></div>
     <div class="lens-hint" id="lensHint" hidden></div>
     <div id="countdown" hidden></div>
+    <button class="pausepane" id="pausePane" hidden><b>⏸</b><span>Kamera dijeda untuk jimat bateri</span><small>Ketik untuk sambung</small></button>
     <div class="izoom" id="zooms"></div>
   </div>
   <div id="flashFx"></div>
+  <div class="qprev" id="qprev" hidden><button class="qpt" id="qpThumb"></button><div class="qpa"><button data-qp="share">Kongsi</button><button data-qp="edit">Sunting</button><button data-qp="del" class="r">Padam</button></div></div>
   <div id="camFail" hidden>
     <svg class="logo" viewBox="0 0 100 100"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6D58A"/><stop offset="1" stop-color="#C9922A"/></linearGradient></defs><circle cx="50" cy="50" r="47" fill="url(#lg)"/><circle cx="50" cy="50" r="38" fill="#0B1B3F"/><circle cx="50" cy="50" r="17" fill="none" stroke="#E8B84A" stroke-width="5"/><circle cx="50" cy="50" r="7" fill="#E8B84A"/><text x="50" y="86" text-anchor="middle" font-size="11" font-weight="800" fill="#E8B84A" font-family="Plus Jakarta Sans,sans-serif">BPG</text></svg>
     <h1 style="color:#fff">BPG Kamera</h1>
@@ -836,7 +878,7 @@ body.oncam #apphead{display:none}
       <div class="gal" id="allGrid"></div>
     </div>
     <div id="galMine" hidden>
-      <div class="sharebar mine"><button class="btn sm blue" id="btnSync2">⇪ Hantar (<span id="syncN2">0</span>)</button><button class="btn sm" id="btnReport">📄 Laporan PDF</button></div>
+      <div class="sharebar mine"><button class="btn sm blue" id="btnSync2">⇪ Hantar (<span id="syncN2">0</span>)</button><button class="btn sm" id="btnReport">📄 Laporan</button><button class="btn sm" id="btnZip">⬇ ZIP</button></div>
     <div class="stats"><div class="stat" style="--sc:var(--accent)"><b id="stTotal">0</b><span>Gambar</span></div><div class="stat" style="--sc:var(--warn)"><b id="stWait">0</b><span>Menunggu hantar</span></div><div class="stat" style="--sc:var(--ok)"><b id="stSent">0</b><span>Di Album BPG</span></div></div>
     <div class="row" style="margin-bottom:10px">
       <div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="in" id="search" placeholder="Cari acara, kapsyen, lokasi…"></div>
@@ -910,6 +952,7 @@ body.oncam #apphead{display:none}
   <div class="pad">
     <div class="eyebrow">Tanpa pemasangan</div><h1>Akses QR</h1>
     <p class="sub">Imbas dan terus guna — tiada pemasangan diperlukan.</p>
+    <button class="btn blue" id="btnScan" style="width:100%;margin-bottom:12px">📷 Imbas QR program</button>
     <div class="scroller" style="margin-bottom:14px"><button class="chip on" data-qr="app">QR Aplikasi</button><button class="chip" data-qr="ev">QR Acara</button></div>
     <div class="card">
       <div id="qrEvWrap" hidden>
@@ -952,7 +995,7 @@ body.oncam #apphead{display:none}
     </div>
     <div class="card"><h2>Gambar</h2>
       <label class="f" style="margin-top:0">Kualiti & saiz</label>
-      <select class="in" data-s="kualiti"><option value="tinggi">Tinggi — 2560px (cetakan)</option><option value="seimbang">Seimbang — 1920px (disyorkan)</option><option value="jimat">Jimat data — 1280px</option></select>
+      <select class="in" data-s="kualiti"><option value="auto">Auto — ikut rangkaian (disyorkan)</option><option value="tinggi">Tinggi — 2560px (cetakan)</option><option value="seimbang">Seimbang — 1920px (disyorkan)</option><option value="jimat">Jimat data — 1280px</option></select>
       <label class="f">Bingkai lalai</label>
       <select class="in" data-s="frame"><option value="rasmi">Rasmi BPG</option><option value="acara">Program (jalur atas)</option><option value="cerah">Ceria (bingkai warna)</option><option value="minimal">Minimal</option><option value="polaroid">Polaroid</option><option value="tiada">Tiada</option></select>
       <label class="f">Logo pada bingkai (PNG lutsinar disyorkan)</label>
@@ -968,13 +1011,15 @@ body.oncam #apphead{display:none}
       <button class="btn sm" id="btnTest" style="margin-top:8px">Uji sambungan</button>
     </div>
     <div class="card"><h2>Paparan</h2>
-      <label class="f" style="margin-top:0">Tema paparan</label><select class="in" data-s="tema"><option value="cerah">☀️ Cerah (warna terang)</option><option value="gelap">🌙 Gelap</option><option value="auto">🌓 Auto ikut telefon</option></select>
+      <div class="tog" style="padding-top:0"><div>Teks besar<small>Mudah dibaca untuk semua</small></div><button class="sw" data-t="big"></button></div>
+      <label class="f">Tema paparan</label><select class="in" data-s="tema"><option value="cerah">☀️ Cerah (warna terang)</option><option value="gelap">🌙 Gelap</option><option value="auto">🌓 Auto ikut telefon</option></select>
       <button class="btn gold" id="btnInstall" style="width:100%;margin-top:10px" hidden>Pasang ke Skrin Utama</button>
       <p class="sub" id="iosHint" style="margin:10px 0 0" hidden>iPhone: tekan butang Kongsi di Safari → “Add to Home Screen”.</p>
     </div>
     <div class="card"><h2>30 Fungsi BPG Kamera</h2><div id="featList"></div></div>
     <div class="card"><h2>10 Fungsi Gempak 🔥</h2><div id="wowList"></div></div>
     <div class="card"><h2>10 Naik Taraf Sistem 🚀</h2><div id="upList"></div></div>
+    <div class="card"><h2>20 Naik Taraf Mesra Pengguna 💙</h2><div id="upList2"></div></div>
     <div class="card"><h2>10 Cabaran Shoot 🏆</h2><div id="chList2"></div></div>
     <div class="card guest-only"><h2>Admin</h2><p class="sub" style="margin:0 0 10px">Tetapan program (nama, tarikh, tempat) dikawal oleh admin.</p><button class="btn blue" id="btnAdminIn" style="width:100%">🔐 Log masuk admin</button></div>
     <div class="card"><h2>Tarikh & tempat program</h2>
@@ -1022,8 +1067,11 @@ body.oncam #apphead{display:none}
 </div>
 <header id="apphead">
   <div class="ahl"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#C9A227"/><circle cx="50" cy="50" r="38" fill="#0F2A63"/><circle cx="50" cy="44" r="15" fill="none" stroke="#E3C463" stroke-width="6"/><circle cx="50" cy="44" r="6" fill="#E3C463"/><text x="50" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="#E3C463" font-family="sans-serif">BPG</text></svg><div><b>BPG Kamera</b><small id="ahProg"></small></div></div>
-  <div class="ahr"><button class="ahch" id="ahCh">🏆 <span>Cabaran</span> <b id="ahStars">0★</b></button><button class="ahme" id="ahMe" aria-label="Profil"><span class="av" id="ahAv">🙂</span></button></div>
+  <div class="ahr"><button class="ahhelp" id="ahHelp" aria-label="Bantuan">?</button><button class="ahch" id="ahCh">🏆 <span>Cabaran</span> <b id="ahStars">0★</b></button><button class="ahme" id="ahMe" aria-label="Profil"><span class="av" id="ahAv">🙂</span></button></div>
 </header>
+<div id="upbar"><i></i></div>
+<div id="offbar" hidden>📴 Luar talian — <span id="offN">0</span> gambar akan dihantar bila internet kembali</div>
+<div id="ptr">↓ Tarik untuk muat semula</div>
 <nav id="nav">
   <button data-v="gal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Galeri<i class="ndot" id="galDot" hidden></i></button>
   <button data-v="live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M7.8 16.2a6 6 0 0 1 0-8.4M19 5a10 10 0 0 1 0 14M5 19A10 10 0 0 1 5 5"/></svg>Live<i class="ndot red" id="liveDot" hidden></i></button>
@@ -1056,12 +1104,13 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LS={get(k,d){try{const v=localStorage.getItem('bpgk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('bpgk_'+k,JSON.stringify(v))}catch(e){}}};
-const DEF={tema:'cerah',nama:'',avatar:'',tarikh:'',tempat:'',admin:false,acara:'',kategori:'Program',kualiti:'seimbang',albumUrl:'',albumKey:'',logo:'',light:true,bunyi:true,autoAlbum:true,frame:'rasmi',stamp:true,gps:false,grid:false,timer:0,burst:false,filter:'asli'};
+const DEF={tema:'cerah',kualiti:'auto',big:false,nama:'',avatar:'',tarikh:'',tempat:'',admin:false,acara:'',kategori:'Program',kualiti:'seimbang',albumUrl:'',albumKey:'',logo:'',light:true,bunyi:true,autoAlbum:true,frame:'rasmi',stamp:true,gps:false,grid:false,timer:0,burst:false,filter:'asli'};
 const S=Object.assign({},DEF,LS.get('s',{}));
 if(!S.v3){S.light=true;S.v3=1;try{localStorage.setItem('bpgk_s',JSON.stringify(S))}catch(e){}}
 const save=()=>LS.set('s',S);
 const KAT=['Perhimpuan','Program','Mesyuarat','Kursus','Bengkel','Lawatan','Majlis','Sukan','Lain-lain'];
 const KUAL={tinggi:{e:2560,q:.92},seimbang:{e:1920,q:.86},jimat:{e:1280,q:.76}};
+function effQ(){if(S.kualiti!=='auto')return S.kualiti;const c=navigator.connection;if(c&&(c.saveData||/2g|3g/.test(c.effectiveType||'')))return 'jimat';return 'seimbang'}
 const albumUrl=()=>(S.albumUrl||CONFIG.ALBUM_URL||'').trim();
 const albumKey=()=>(S.albumKey||CONFIG.ALBUM_KEY||'').trim();
 const BULAN=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis'];
@@ -1228,7 +1277,7 @@ function beautify(cv,lv){const k=[0,.42,.64,.86][lv]||0;if(!k)return;const W=cv.
 function beautyCss(lv){return lv?` brightness(${1+lv*.025}) contrast(${1-lv*.03}) saturate(${1+lv*.03})`:''}
 async function compose(src,o,edgeOverride){
   await fontsReady;
-  const img=await loadImg(src),k=KUAL[S.kualiti]||KUAL.seimbang,edge=edgeOverride||k.e;
+  const img=await loadImg(src),k=KUAL[effQ()]||KUAL.seimbang,edge=edgeOverride||k.e;
   const rot=(((o.rot||0)%360)+360)%360,iw=img.naturalWidth,ih=img.naturalHeight;
   const rw=rot%180?ih:iw,rh=rot%180?iw:ih;
   let cw=rw,ch=rh,cx=0,cy=0;const R=RATIO[o.crop||'asal'];
@@ -1267,6 +1316,7 @@ async function addPhoto(blob,opt={}){
   await DB.put(rec);PH.unshift(rec);
   if(meta.cabaran)completeCh(meta.cabaran,rec.id);
   setLast(true);refreshStats();if(cur==='gal')renderGal();
+  if(cur==='cam'&&!opt.raw)showQuick(rec);
   if(rec.status==='menunggu')setTimeout(sync,400);
   return rec;
 }
@@ -1323,7 +1373,8 @@ let actx=null;
 function clickSound(){if(!S.bunyi)return;try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}
   try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const n=actx.createBufferSource(),buf=actx.createBuffer(1,actx.sampleRate*.08,actx.sampleRate),d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);n.buffer=buf;const g=actx.createGain();g.gain.value=.35;n.connect(g).connect(actx.destination);n.start()}catch(e){}}
 function flashFx(){const f=$('#flashFx');f.classList.remove('go');void f.offsetWidth;f.classList.add('go')}
-async function countdown(n){const c=$('#countdown');c.hidden=false;for(let i=n;i>0;i--){c.textContent=i;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}await sleep(1000)}c.hidden=true}
+function beep(f,d=.12){if(!S.bunyi)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;g.gain.setValueAtTime(.18,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+d);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+d)}catch(e){}}
+async function countdown(n){const c=$('#countdown');c.hidden=false;for(let i=n;i>0;i--){c.textContent=i;beep(i===1?1046:784);try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}await sleep(1000)}c.hidden=true}
 const MODES=[['t10','10S'],['t3','3S'],['foto','FOTO'],['burst','BURST'],['pintar','PINTAR'],['malam','MALAM'],['booth','BOOTH'],['potret','POTRET'],['mini','MINI'],['dokumen','DOKUMEN']];
 const MODE_HINT={pintar:'✨ Burst Pintar — 5 keping, yang paling tajam dipilih',malam:'🌙 Mod Malam — tahan telefon pegun 1 saat',booth:'📸 Photobooth — 4 gambar automatik',potret:'🎯 Potret — subjek tajam, latar kabur',mini:'🏙️ Mini — kesan miniatur tilt-shift',dokumen:'📄 Dokumen — sesuai untuk buku program',burst:'⚡ Burst — 3 keping pantas',t3:'⏱ Pemasa 3 saat',t10:'⏱ Pemasa 10 saat'};
 function curMode(){return S.mode||(S.burst?'burst':S.timer===10?'t10':S.timer===3?'t3':'foto')}
@@ -1434,7 +1485,7 @@ let selMode=false,sel=new Set(),katF='Semua',urls=[];
 function refreshStats(){
   $('#stTotal').textContent=PH.length;
   const w=PH.filter(p=>p.status==='menunggu').length;$('#stWait').textContent=w;$('#syncN').textContent=w;
-  $('#stSent').textContent=PH.filter(p=>p.status==='dihantar').length;const n2=$('#syncN2');if(n2)n2.textContent=w;
+  $('#stSent').textContent=PH.filter(p=>p.status==='dihantar').length;updOff();const n2=$('#syncN2');if(n2)n2.textContent=w;
 }
 function filtered(){const q=$('#search').value.trim().toLowerCase();return PH.filter(p=>(katF==='Semua'||p.meta.kategori===katF)&&(!q||[p.meta.acara,p.meta.caption,p.meta.lokasi,p.meta.nama,p.meta.kategori].join(' ').toLowerCase().includes(q)))}
 function renderGal(){
@@ -1442,7 +1493,7 @@ function renderGal(){
   const kats=['Semua',...new Set(PH.map(p=>p.meta.kategori).filter(Boolean))];
   $('#katChips').innerHTML=kats.map(k=>`<button class="chip ${k===katF?'on':''}" data-kf="${esc(k)}">${esc(k)}</button>`).join('');
   const list=filtered();const g=$('#gal');
-  if(!list.length){g.innerHTML=`<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><div>${PH.length?'Tiada padanan carian.':'Belum ada gambar. Ambil gambar pertama anda!'}</div></div>`;}
+  if(!list.length){g.innerHTML=`<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><div>${PH.length?'Tiada padanan carian.':'Belum ada gambar dalam peranti ini.'}</div>${PH.length?'':`<button class="btn blue" onclick="go('cam')">📸 Ambil gambar pertama</button>`}</div>`;}
   else{
     const groups=new Map();for(const p of list){const k=dayLabel(p.meta.t);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)}
     g.innerHTML=[...groups].map(([k,arr])=>`<div class="gsec"><h4>${k}<span>${arr.length}</span></h4><div class="gal">${arr.map((p,i)=>{const u=URL.createObjectURL(p.thumb);urls.push(u);const big=i===0&&arr.length>=3;return `<div class="gi ${big?'big':''} ${sel.has(p.id)?'sel':''}" data-id="${p.id}"><img src="${u}" loading="lazy" alt=""><i class="st ${p.status}"></i><i class="ck"></i>${big&&p.meta.caption?`<div class="cap">${esc(p.meta.caption)}</div>`:''}</div>`}).join('')}</div></div>`).join('');
@@ -1470,7 +1521,7 @@ $('#selbar').addEventListener('click',async e=>{const a=e.target.closest('[data-
   if(a==='album'){queueAlbum(R);exitSel()}
   if(a==='slide')slideshow(R);
   if(a==='collage'){if(R.length<2||R.length>4){toast('Pilih 2 hingga 4 gambar untuk kolaj');return}collageUI(R)}
-  if(a==='del'){if(await ask('Padam gambar?',`${R.length} gambar akan dipadam dari peranti ini.`,'Padam',true)){for(const r of R){await DB.del(r.id)}PH=PH.filter(p=>!sel.has(p.id));exitSel();setLast();toast('Dipadam')}}
+  if(a==='del'){exitSel();softDelete(R)}
 });
 
 /* ================= KONGSI / MUAT TURUN ================= */
@@ -1537,7 +1588,7 @@ function openEditor(rec){
     if(a==='share'){if(dirty)await doSave();shareRecs([rec])}
     if(a==='dl'){if(dirty)await doSave();downloadRecs([rec])}
     if(a==='album'){if(dirty)await doSave();queueAlbum([rec])}
-    if(a==='del'){if(await ask('Padam gambar ini?','Gambar akan dipadam dari peranti.','Padam',true)){await DB.del(rec.id);PH=PH.filter(p=>p.id!==rec.id);renderGal();setLast();m.remove();toast('Dipadam')}}
+    if(a==='del'){m.remove();softDelete([rec])}
   });
   m.addEventListener('input',e=>{const k=e.target.dataset.adj;if(k){ed.edits.adj[k]=+e.target.value;$('#v_'+k,m).textContent=e.target.value;chg()}const mm=e.target.dataset.m;if(mm&&!(mm==='acara'&&!isAdmin())){ed.meta[mm]=e.target.value;chg()}});
 }
@@ -1585,7 +1636,7 @@ function slideshow(R){
 let syncing=false;
 const b64=blob=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(blob)});
 async function uploadOne(r){
-  const body=JSON.stringify({action:'upload',key:albumKey(),name:fname(r),image:await b64(r.final),meta:r.meta});
+  const body=JSON.stringify({action:'upload',key:albumKey(),name:fname(r),image:await b64(r.final),meta:{...r.meta,owner:S.dev}});
   const res=await fetch(albumUrl(),{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body});
   const j=await res.json();if(!j.ok)throw new Error(j.error||'Gagal');r.status='dihantar';r.driveId=j.id;await DB.put(r);
 }
@@ -1597,8 +1648,8 @@ async function sync(verbose){
   if(!albumUrl()||syncing)return;if(!navigator.onLine){if(verbose)toast('Luar talian — akan dihantar bila ada internet');return}
   const q=PH.filter(p=>p.status==='menunggu');if(!q.length){if(verbose)toast('Semua gambar sudah dihantar ✓');return}
   syncing=true;$('#btnSync').disabled=true;let ok=0,err='';
-  let idx=0;const worker=async()=>{while(idx<q.length){const r=q[idx++];for(let a=0;a<3;a++){try{await uploadOne(r);ok++;refreshStats();break}catch(e){err=e.message;await sleep(800*(a+1))}}}};
-  await Promise.all([worker(),worker()]);if(cur==='gal')renderGal();_albumAt=0;
+  let idx=0;upProg(0,q.length);const worker=async()=>{while(idx<q.length){const r=q[idx++];for(let a=0;a<3;a++){try{await uploadOne(r);ok++;upProg(ok,q.length);refreshStats();break}catch(e){err=e.message;await sleep(800*(a+1))}}}};
+  await Promise.all([worker(),worker()]);upProg(-1);if(cur==='gal')renderGal();_albumAt=0;
   syncing=false;$('#btnSync').disabled=false;refreshStats();if(cur==='gal')renderGal();
   if(ok)toast(`${ok} gambar masuk ke Album BPG ✓`);else if(err&&verbose)toast('Gagal menghantar: '+err);
   if(ok&&cur==='album')loadAlbum();
@@ -1696,7 +1747,7 @@ function bindSettings(){
   $$('[data-s]').forEach(el=>{el.value=S[el.dataset.s]??''});
   $$('[data-t]').forEach(el=>el.classList.toggle('on',!!S[el.dataset.t]));
   $('#logoPrev').style.backgroundImage=S.logo?`url(${S.logo})`:'';
-  applyTheme();const ts=$('[data-s=tema]');if(ts)ts.value=S.tema||'cerah';
+  document.body.classList.toggle('big',!!S.big);applyTheme();const ts=$('[data-s=tema]');if(ts)ts.value=S.tema||'cerah';
 }
 $$('[data-s]').forEach(el=>el.addEventListener('change',()=>{if(el.dataset.s==='tema'){S.tema=el.value;save();applyTheme();return}if(['acara','tarikh','tempat','albumUrl','albumKey'].includes(el.dataset.s)&&!isAdmin()){bindSettings();return}S[el.dataset.s]=el.value.trim();save();syncTools();netUI();if(el.dataset.s==='albumUrl'&&S.albumUrl)sync()}));
 $$('[data-t]').forEach(el=>el.addEventListener('click',()=>{const k=el.dataset.t;S[k]=!S[k];save();bindSettings();if(k==='autoAlbum'&&S[k]&&!albumUrl())toast('Isikan URL Album untuk hantar automatik')}));
@@ -1767,7 +1818,7 @@ function openWelcome(edit){
   $('#wGo').onclick=()=>{if(nm.value.trim().length<2)return;if(edit&&!needPdpa){finish();return}$('#wStep1').hidden=true;$('#wStep2').hidden=false;$('#ckPdpa').checked=!needPdpa;$('#ckPub').checked=S.autoAlbum!==false;$('#wAgree').disabled=!$('#ckPdpa').checked;$('.wcard',w).scrollIntoView?.()};
   $('#ckPdpa').onchange=()=>{$('#wAgree').disabled=!$('#ckPdpa').checked};
   $('#wBack').onclick=()=>{$('#wStep2').hidden=true;$('#wStep1').hidden=false};
-  $('#wAgree').onclick=()=>{if(!$('#ckPdpa').checked)return;S.pdpa={v:PDPA_V,t:Date.now()};S.autoAlbum=$('#ckPub').checked;finish()};
+  $('#wAgree').onclick=()=>{if(!$('#ckPdpa').checked)return;S.pdpa={v:PDPA_V,t:Date.now()};S.autoAlbum=$('#ckPub').checked;finish();if(S.tour!==1)setTimeout(showTour,500)};
   nm.onkeydown=e=>{if(e.key==='Enter'&&!$('#wGo').disabled)$('#wGo').click()};
   upd();w.hidden=false;setTimeout(()=>{try{if(!edit)nm.focus()}catch(e){}},350);
 }
@@ -1804,9 +1855,9 @@ function openViewer(list,idx){
   let i=idx,u=null;const v=document.createElement('div');v.id='viewer';
   const I=(p)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
   v.innerHTML=`<div class="vt"><button data-v="x">‹ Galeri</button><div id="vtT"></div><button data-v="edit">Sunting</button></div><div class="vs"><img alt=""></div>
-  <div class="vb"><button data-v="share">${I('<path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>')}Kongsi</button><button data-v="dl">${I('<path d="M12 3v13M7 11l5 5 5-5M5 21h14"/>')}Simpan</button><button data-v="del" class="del">${I('<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/>')}Padam</button></div>`;
+  <div class="vb"><button data-v="share">${I('<path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>')}Kongsi</button><button data-v="dl">${I('<path d="M12 3v13M7 11l5 5 5-5M5 21h14"/>')}Simpan</button><button data-v="unpub" id="vUnpub" hidden>${I('<circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/>')}Tarik</button><button data-v="del" class="del">${I('<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/>')}Padam</button></div>`;
   document.body.appendChild(v);const img=$('img',v);
-  const show=(dir)=>{const r=list[i];if(u)URL.revokeObjectURL(u);u=URL.createObjectURL(r.final);img.style.transition='none';img.style.opacity=0;img.style.transform=`translateX(${(dir||0)*40}px)`;img.src=u;requestAnimationFrame(()=>{img.style.transition='';img.style.opacity=1;img.style.transform='none'});const d=new Date(r.meta.t);$('#vtT',v).innerHTML=`${dayLabel(r.meta.t)}<small>${p2(d.getHours())}:${p2(d.getMinutes())} · ${i+1} / ${list.length}</small>`};
+  let show=(dir)=>{const r=list[i];if(u)URL.revokeObjectURL(u);u=URL.createObjectURL(r.final);img.style.transition='none';img.style.opacity=0;img.style.transform=`translateX(${(dir||0)*40}px)`;img.src=u;requestAnimationFrame(()=>{img.style.transition='';img.style.opacity=1;img.style.transform='none'});const d=new Date(r.meta.t);$('#vtT',v).innerHTML=`${dayLabel(r.meta.t)}<small>${p2(d.getHours())}:${p2(d.getMinutes())} · ${i+1} / ${list.length}</small>`};
   const close=()=>{if(u)URL.revokeObjectURL(u);v.remove();document.removeEventListener('keydown',kd)};
   const nav=d=>{const n=i+d;if(n<0||n>=list.length)return;i=n;show(d)};
   const kd=e=>{if(e.key==='Escape')close();if(e.key==='ArrowRight')nav(1);if(e.key==='ArrowLeft')nav(-1)};document.addEventListener('keydown',kd);
@@ -1815,7 +1866,10 @@ function openViewer(list,idx){
   $('.vs',v).addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(dx<-60)nav(1);else if(dx>60)nav(-1);else img.style.transform='none'});
   v.addEventListener('click',async e=>{const a=e.target.closest('[data-v]')?.dataset.v;if(!a)return;const r=list[i];
     if(a==='x')close();if(a==='edit'){close();openEditor(r)}if(a==='share')socialSheet({title:r.meta.acara||'BPG Kamera',url:r.driveId?shareLink({pic:r.driveId}):shareLink({}),recs:[r]});if(a==='dl')downloadRecs([r]);
-    if(a==='del'&&await ask('Padam gambar ini?','Gambar akan dipadam dari peranti ini.','Padam',true)){await DB.del(r.id);PH=PH.filter(p=>p.id!==r.id);list.splice(i,1);renderGal();setLast();if(!list.length)close();else{i=Math.min(i,list.length-1);show(0)}}});
+    if(a==='unpub')unpublish(r.driveId);
+    if(a==='del'){list.splice(i,1);softDelete([r]);if(!list.length)close();else{i=Math.min(i,list.length-1);show(0)}}});
+  const _sh=show;show=d=>{_sh(d);const b=$('#vUnpub',v);if(b)b.hidden=!list[i].driveId};
+  gestures(img,{onClose:close,onDouble:null});
   show(0);
 }
 
@@ -1876,14 +1930,14 @@ async function fetchAlbum(force){if(!albumUrl())return null;if(!force&&_albumCac
 function allFiltered(items){return items.filter(it=>{const m=it.meta||{};if(allF==='semua')return true;if(allF==='saya')return m.nama===whoAmI();if(allF.startsWith('ch:'))return m.cabaran===allF.slice(3);if(allF.startsWith('by:'))return m.nama===allF.slice(3);return true})}
 async function renderAll(force){
   const grid=$('#allGrid'),info=$('#allInfo');if(!albumUrl()){grid.innerHTML='';info.textContent='Album BPG belum disambungkan.';return}
-  if(!_albumCache)info.textContent='Memuatkan galeri program…';
-  const items=await fetchAlbum(force);if(!items){info.textContent='Tidak dapat memuatkan galeri (semak internet).';return}
+  if(!_albumCache){info.textContent='Memuatkan galeri program…';grid.innerHTML='<div class="gi sk"></div>'.repeat(9)}
+  const items=await fetchAlbum(force);if(!items){info.innerHTML='Tidak dapat memuatkan galeri (semak internet). <button class="btn sm" onclick="renderAll(true)">Cuba lagi</button>';grid.innerHTML='';return}
   const chs=[...new Set(items.map(i=>i.meta&&i.meta.cabaran).filter(c=>CHMAP[c]))];
   const chips=[['semua','Semua'],['saya','📷 Oleh saya'],...chs.map(c=>['ch:'+c,CHMAP[c].i+' '+CHMAP[c].n])];if(allF.startsWith('by:'))chips.splice(2,0,[allF,'👤 '+allF.slice(3)]);
   $('#allChips').innerHTML=chips.map(([k,n])=>`<button class="chip ${k===allF?'on':''}" data-af="${esc(k)}">${esc(n)}</button>`).join('');
   const L=allFiltered(items);window._allList=L;const ppl=new Set(items.map(i=>i.meta&&i.meta.nama)).size;
   info.textContent=`${L.length} gambar${allF==='semua'?` daripada ${ppl} peserta`:''} · ${curAcara()||'Album BPG'}`;
-  grid.innerHTML=L.length?L.map((it,i)=>`<div class="gi" data-ri="${i}"><img src="${esc(it.thumb)}" loading="lazy" alt="" referrerpolicy="no-referrer">${it.meta&&it.meta.cabaran&&CHMAP[it.meta.cabaran]?`<span class="chb">${CHMAP[it.meta.cabaran].i}</span>`:''}${it.likes>0?`<span class="lk">❤️ ${it.likes}</span>`:''}</div>`).join(''):'<div class="empty" style="grid-column:1/-1">Belum ada gambar di sini. Jadi yang pertama! 📸</div>';
+  grid.innerHTML=L.length?L.map((it,i)=>`<div class="gi" data-ri="${i}"><img src="${esc(it.thumb)}" loading="lazy" alt="" referrerpolicy="no-referrer">${it.meta&&it.meta.cabaran&&CHMAP[it.meta.cabaran]?`<span class="chb">${CHMAP[it.meta.cabaran].i}</span>`:''}${it.likes>0?`<span class="lk">❤️ ${it.likes}</span>`:''}</div>`).join(''):'<div class="empty" style="grid-column:1/-1">Belum ada gambar di sini.<br><button class="btn blue" onclick="go(\'cam\')">📸 Jadi yang pertama</button></div>';
   renderHi(items);markSeen(items);
 }
 function setSeg(sg){galSeg=sg;const gp=$('#galProg');if(gp){gp.textContent='📍 '+(curAcara()||'BPG Kamera');gp.hidden=!curAcara()}$$('#galSeg button').forEach(b=>b.classList.toggle('on',b.dataset.seg===sg));$('#galAll').hidden=sg!=='semua';$('#galMine').hidden=sg!=='saya';$('#btnSelMode').hidden=sg!=='saya';
@@ -1916,9 +1970,9 @@ $('#qrColBtn').onclick=()=>{if(allF==='semua'){toast('Pilih koleksi dahulu (cth.
 function openRemote(list,idx){
   let i=idx;const v=document.createElement('div');v.id='viewer';const I=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
   v.innerHTML=`<div class="vt"><button data-v="x">‹ Kembali</button><div id="vtT"></div><button data-v="col">Koleksi</button></div><div class="vs"><img alt="" referrerpolicy="no-referrer"></div>
-  <div class="vb"><button data-v="like" id="vLike">${I('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>')}<span>Suka</span></button><button data-v="soc">${I('<path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>')}Kongsi</button><button data-v="qr">${I('<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>')}QR gambar</button><button data-v="drive">${I('<path d="M14 3h7v7M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>')}Buka</button><button data-v="cam">${I('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>')}Kamera</button></div>`;
+  <div class="vb"><button data-v="like" id="vLike">${I('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>')}<span>Suka</span></button><button data-v="soc">${I('<path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>')}Kongsi</button><button data-v="qr">${I('<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>')}QR gambar</button><button data-v="drive">${I('<path d="M14 3h7v7M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>')}Buka</button><button data-v="unpub" id="rUnpub" hidden>${I('<circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/>')}Tarik</button><button data-v="cam">${I('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>')}Kamera</button></div>`;
   document.body.appendChild(v);const img=$('img',v);
-  const show=d=>{const it=list[i],m=it.meta||{};img.style.transition='none';img.style.opacity=0;img.style.transform=`translateX(${(d||0)*40}px)`;img.src=it.big||it.thumb;requestAnimationFrame(()=>{img.style.transition='';img.style.opacity=1;img.style.transform='none'});
+  let show=d=>{const it=list[i],m=it.meta||{};img.style.transition='none';img.style.opacity=0;img.style.transform=`translateX(${(d||0)*40}px)`;img.src=it.big||it.thumb;requestAnimationFrame(()=>{img.style.transition='';img.style.opacity=1;img.style.transform='none'});
     paintLike();$('#vtT',v).innerHTML=`${esc(m.nama||'Peserta')}<small>${m.cabaran&&CHMAP[m.cabaran]?CHMAP[m.cabaran].i+' '+esc(CHMAP[m.cabaran].n)+' · ':''}${list.length>1?(i+1)+' / '+list.length:''}</small>`};
   function paintLike(){const it=list[i],b=$('#vLike',v);if(!b)return;const on=LIKED.has(it.id);b.classList.toggle('liked',on);$('span',b).textContent=(it.likes>0?it.likes+' ':'')+(on?'Disukai':'Suka')}
   const close=()=>{v.remove();document.removeEventListener('keydown',kd)};const nav=d=>{const n=i+d;if(n<0||n>=list.length)return;i=n;show(d)};
@@ -1926,10 +1980,13 @@ function openRemote(list,idx){
   let sx=null;$('.vs',v).addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});$('.vs',v).addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(dx<-60)nav(1);else if(dx>60)nav(-1)});
   v.addEventListener('click',e=>{const a=e.target.closest('[data-v]')?.dataset.v;if(!a)return;const it=list[i],m=it.meta||{};
     if(a==='x')close();if(a==='drive')window.open(it.view,'_blank');if(a==='cam'){close();go('cam')}
+    if(a==='unpub')unpublish(it.id);
     if(a==='qr')shareQR('Gambar oleh '+(m.nama||'peserta'),curAcara(),shareLink({pic:it.id}));
     if(a==='like'){toggleLike(it);paintLike()}
     if(a==='soc')socialSheet({title:'Gambar oleh '+(m.nama||'peserta'),url:shareLink({pic:it.id})});
     if(a==='col'&&m.nama){close();allF='by:'+m.nama;go('gal');setSeg('semua')}});
+  const _sh=show;show=d=>{_sh(d);const b=$('#rUnpub',v);if(b)b.hidden=!PH.some(p=>p.driveId===list[i].id)};
+  gestures(img,{onClose:close,onDouble:()=>{const it=list[i];if(!LIKED.has(it.id)){toggleLike(it);paintLike()}const h=document.createElement('div');h.className='heart';h.textContent='❤️';$('.vs',v).appendChild(h);setTimeout(()=>h.remove(),900)}});
   show(0);
 }
 
@@ -2021,7 +2078,7 @@ const ago=t=>{const m=Math.round((Date.now()-t)/60000);return m<1?'baru sahaja':
 async function fetchLives(){if(!albumUrl())return LIVES;try{const u=new URL(albumUrl());u.searchParams.set('action','live_list');u.searchParams.set('acara',curAcara());const j=await (await fetch(u)).json();if(j.ok)LIVES=j.items||[]}catch(e){}updLiveUI();return LIVES}
 function updLiveUI(){const n=LIVES.length;$('#liveDot').hidden=!n;const p=$('#livePill');p.hidden=!n;p.textContent=n+' LIVE';$('#liveCount').textContent=n;$('#liveProg').textContent=curAcara();if(cur==='live')renderLives()}
 function renderLives(){const el=$('#liveList');
-  if(!LIVES.length){el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:44px">📡</div><h2 style="margin:6px 0 2px">Tiada siaran buat masa ini</h2><p class="sub" style="margin:0">Jadilah yang pertama siarkan program ini!</p></div>`;return}
+  if(!LIVES.length){el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:44px">📡</div><h2 style="margin:6px 0 2px">Tiada siaran buat masa ini</h2><p class="sub" style="margin:0">Jadilah yang pertama siarkan program ini!</p><button class="btn" style="margin-top:12px;background:#C62828;color:#fff;border:0" onclick="goLiveSheet()">🔴 Mula LIVE</button></div>`;return}
   el.innerHTML=LIVES.map((L,k)=>{const P=PLAT[L.platform]||PLAT.lain,yid=L.platform==='youtube'?ytId(L.url):'',mine=L.id===S.myLive;
     return `<div class="lcard"><div class="lh"><div class="av2">${esc((L.nama||'🙂').split(' ')[0])}</div><div><b>${esc(L.title||'LIVE')}</b><small>${esc(L.nama||'')} · ${P.n} · ${ago(L.t)}</small></div><span class="lbadge"><i></i>LIVE</span></div>
     ${yid?`<div class="lvid" data-yt="${yid}"><img src="https://i.ytimg.com/vi/${yid}/hqdefault.jpg" alt=""><div class="pl">▶</div></div>`:`<a class="lvid" href="${esc(L.url)}" target="_blank" rel="noopener" style="background:linear-gradient(135deg,${P.c},#7B5CFF);text-decoration:none"><div class="lext"><div class="pi">${P.i}</div>Tonton di ${P.n} ↗</div></a>`}
@@ -2092,11 +2149,83 @@ $('#btnPdpa').onclick=()=>sheet(`<div class="pdpah"><span>🛡️</span><div><b>
 $('#btnWithdraw').onclick=async()=>{if(!(await ask('Tarik balik kebenaran?','Gambar baharu tidak akan dikongsi ke Galeri Awam. Untuk memadam gambar yang sudah dikongsi, hubungi pentadbir.','Tarik balik',true)))return;S.autoAlbum=false;save();$('#autoUp').checked=false;$('#autoUp').dispatchEvent(new Event('change'))};
 setInterval(()=>{const a=$('#ahStars');if(a)a.textContent=chStars()+'★'},2000);
 
+
+/* ================= v12: 20 NAIK TARAF MESRA PENGGUNA ================= */
+function toastAct(msg,label,fn,ms=5000){const t=$('#toast');t.innerHTML='';const sp=document.createElement('span');sp.textContent=msg;const b=document.createElement('button');b.textContent=label;b.onclick=()=>{fn();t.classList.remove('on','act')};t.append(sp,b);t.classList.add('on','act');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on','act'),ms)}
+const _toast0=toast;toast=function(m,ms){$('#toast').classList.remove('act');_toast0(m,ms)};
+async function softDelete(recs){const ids=new Set(recs.map(r=>r.id));const removed=PH.filter(p=>ids.has(p.id));if(!removed.length)return;PH=PH.filter(p=>!ids.has(p.id));renderGal();setLast();refreshStats();let undone=false;
+  try{navigator.vibrate(12)}catch(_){}toastAct(`${removed.length} gambar dipadam`,'Buat asal',()=>{undone=true;PH=[...removed,...PH].sort((a,b)=>b.t-a.t);renderGal();setLast();refreshStats();toast('Dipulihkan ✓',1200)});
+  setTimeout(async()=>{if(!undone)for(const r of removed)await DB.del(r.id)},5600)}
+function showQuick(rec){const q=$('#qprev');if(!q)return;q.hidden=false;const u=URL.createObjectURL(rec.thumb);$('#qpThumb').style.backgroundImage=`url(${u})`;q._rec=rec;clearTimeout(q._t);q._t=setTimeout(()=>{q.hidden=true;URL.revokeObjectURL(u)},4500)}
+$('#qprev').addEventListener('click',e=>{const q=$('#qprev'),r=q._rec;if(!r)return;const a=e.target.closest('[data-qp]')?.dataset.qp;q.hidden=true;
+  if(e.target.closest('#qpThumb'))openViewer([r],0);if(a==='share')socialSheet({title:r.meta.acara||'BPG Kamera',url:shareLink({}),recs:[r]});if(a==='edit')openEditor(r);if(a==='del')softDelete([r])});
+/* gerak isyarat penonton: cubit zum, seret, ketik dua kali, leret bawah tutup */
+function gestures(img,{onClose,onDouble}){let s=1,tx=0,ty=0,p0=null,last=0,start=null;const apply=()=>{img.style.transition='none';img.style.transform=`translate(${tx}px,${ty}px) scale(${s})`};
+  const reset=()=>{s=1;tx=0;ty=0;img.style.transition='';img.style.transform='none'};
+  img.addEventListener('touchstart',e=>{if(!/scale/.test(img.style.transform))s=1,tx=0,ty=0;
+    if(e.touches.length===2){const[a,b]=e.touches;p0={d:Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY),s};e.stopPropagation()}
+    else{start={x:e.touches[0].clientX,y:e.touches[0].clientY,tx,ty,t:Date.now()};if(s>1)e.stopPropagation()}},{passive:true});
+  img.addEventListener('touchmove',e=>{if(e.touches.length===2&&p0){const[a,b]=e.touches;s=Math.max(1,Math.min(4,p0.s*Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY)/p0.d));apply();e.stopPropagation();return}
+    if(start&&s>1){tx=start.tx+e.touches[0].clientX-start.x;ty=start.ty+e.touches[0].clientY-start.y;apply();e.stopPropagation()}
+    else if(start&&s===1){const dy=e.touches[0].clientY-start.y,dx=e.touches[0].clientX-start.x;if(dy>20&&Math.abs(dx)<50){img.style.transition='none';img.style.transform=`translateY(${dy}px) scale(${1-Math.min(.25,dy/1200)})`;img.parentElement.style.background=`rgba(0,0,0,${1-Math.min(.6,dy/400)})`;e.stopPropagation()}}},{passive:true});
+  img.addEventListener('touchend',e=>{if(p0&&e.touches.length<2){p0=null;if(s<1.05)reset();e.stopPropagation();return}if(!start)return;const ch=e.changedTouches[0],dy=ch.clientY-start.y,dx=ch.clientX-start.x,now=Date.now();
+    if(s===1&&dy>110&&Math.abs(dx)<70){e.stopPropagation();onClose&&onClose();return}
+    if(s===1&&Math.abs(dy)>20){img.parentElement.style.background='';reset();e.stopPropagation()}
+    if(Math.abs(dx)<10&&Math.abs(dy)<10&&now-start.t<250){if(now-last<300){last=0;if(onDouble&&s===1){onDouble()}else{if(s>1)reset();else{s=2.2;apply()}}}else last=now}
+    if(s>1)e.stopPropagation();start=null},{passive:true});}
+/* luar talian + kemajuan muat naik */
+function updOff(){const n=PH.filter(p=>p.status==='menunggu').length;$('#offN').textContent=n;$('#offbar').hidden=navigator.onLine}
+window.addEventListener('online',updOff);window.addEventListener('offline',updOff);
+function upProg(done,total){const b=$('#upbar');if(done<0){$('#upbar i').style.width='100%';setTimeout(()=>b.classList.remove('on'),600);return}b.classList.add('on');$('#upbar i').style.width=(total?Math.max(6,done/total*100):6)+'%'}
+/* tarik untuk muat semula (galeri) */
+(()=>{const g=$('#v-gal'),ind=$('#ptr');let y0=null,dy=0;g.addEventListener('touchstart',e=>{y0=g.scrollTop<=0?e.touches[0].clientY:null;dy=0},{passive:true});
+  g.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;ind.classList.toggle('show',dy>25);ind.classList.toggle('go',dy>80);ind.textContent=dy>80?'↻ Lepaskan untuk muat semula':'↓ Tarik untuk muat semula'},{passive:true});
+  g.addEventListener('touchend',()=>{if(y0!=null&&dy>80){ind.textContent='↻ Memuatkan…';if(galSeg==='semua')renderAll(true).then(()=>ind.classList.remove('show','go'));else{renderGal();setTimeout(()=>ind.classList.remove('show','go'),500)}}else ind.classList.remove('show','go');y0=null})})();
+/* tarik balik gambar dari Galeri Awam */
+async function unpublish(id){if(!id)return;if(!(await ask('Tarik dari Galeri Awam?','Gambar akan dibuang daripada galeri program untuk semua peserta. Salinan dalam peranti anda kekal.','Tarik balik',true)))return;
+  try{const j=await (await fetch(albumUrl(),{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'delete',key:albumKey(),id,owner:S.dev})})).json();if(!j.ok)throw new Error(j.error);
+    for(const p of PH)if(p.driveId===id){p.driveId='';p.status='lokal';await DB.put(p)}_albumAt=0;_albumCache=null;$$('#viewer').forEach(x=>x.remove());refreshStats();if(cur==='gal'){if(galSeg==='semua')renderAll(true);else renderGal()}toast('Gambar ditarik dari Galeri Awam ✓',2000)}
+  catch(e){toast('Tidak dapat ditarik: '+e.message,2600)}}
+/* muat turun semua (ZIP) */
+async function zipAll(){const L=PH.filter(p=>!curAcara()||p.meta.acara===curAcara());if(!L.length){toast('Tiada gambar untuk dimuat turun');return}if(!window.JSZip){toast('Fungsi ZIP perlukan internet');return}
+  toast(`Menyediakan ZIP (${L.length} gambar)…`,4000);const z=new JSZip();L.forEach((r,i)=>z.file(fname(r,i+1),r.final));const out=await z.generateAsync({type:'blob'}),name=`BPG_${slug(curAcara())}_${L.length}_gambar.zip`;
+  const f=new File([out],name,{type:'application/zip'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});return}}catch(e){if(e.name==='AbortError')return}download(out,name)}
+$('#btnZip').onclick=zipAll;
+/* imbas QR program */
+async function scanQR(){const wasCam=!!stream;stopCam();let st=null,run=true;const el=document.createElement('div');el.id='scanner';
+  el.innerHTML=`<b>Halakan kamera ke kod QR program</b><div class="sv"><video playsinline muted autoplay></video><div class="line"></div></div><button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:0">Batal</button>`;document.body.appendChild(el);const v=$('video',el);
+  const done=t=>{run=false;if(st)st.getTracks().forEach(x=>x.stop());el.remove();if(t)handleScan(t);else if(wasCam&&cur==='cam')startCam()};$('button',el).onclick=()=>done(null);
+  try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});v.srcObject=st;await v.play()}catch(e){done(null);toast('Kamera tidak dapat dibuka untuk imbasan');return}
+  let det=null;if('BarcodeDetector' in window){try{det=new BarcodeDetector({formats:['qr_code']})}catch(e){}}
+  if(!det&&!window.jsQR){await new Promise(r=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js';sc.onload=sc.onerror=r;document.head.appendChild(sc)})}
+  const c=mk(480,480),x=c.getContext('2d',{willReadFrequently:true});
+  const loop=async()=>{if(!run)return;try{if(v.videoWidth){if(det){const r=await det.detect(v);if(r[0]){beep(1200);return done(r[0].rawValue)}}else if(window.jsQR){const s0=Math.min(v.videoWidth,v.videoHeight);x.drawImage(v,(v.videoWidth-s0)/2,(v.videoHeight-s0)/2,s0,s0,0,0,480,480);const r=jsQR(x.getImageData(0,0,480,480).data,480,480);if(r&&r.data){beep(1200);return done(r.data)}}}}catch(e){}setTimeout(loop,180)};loop()}
+function handleScan(t){let u=null;try{u=new URL(t)}catch(e){}
+  if(u&&u.searchParams.get('acara')){S.acara=u.searchParams.get('acara');S.tarikh=u.searchParams.get('tarikh')||'';S.tempat=u.searchParams.get('tempat')||'';const k=u.searchParams.get('kat');if(k&&KAT.includes(k))S.kategori=k;save();_albumCache=null;renderMe();syncTools();bindSettings();toast('✓ Program: '+S.acara,2600);go('cam');return}
+  if(u){ask('Buka pautan?',t,'Buka').then(ok=>{if(ok){const a=document.createElement('a');a.href=t;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}});return}
+  toast('Kod QR: '+t,4000)}
+$('#btnScan').onclick=scanQR;
+/* jimat bateri: jeda kamera bila tidak aktif */
+let idleT=null;function bumpIdle(){clearTimeout(idleT);if(cur!=='cam')return;idleT=setTimeout(()=>{if(cur==='cam'&&stream&&!busy&&!CLAP.on&&!document.querySelector('#welcome:not([hidden])')){stopCam();$('#pausePane').hidden=false}},90000)}
+['touchstart','click','keydown'].forEach(ev=>$('#v-cam').addEventListener(ev,bumpIdle,{passive:true}));
+$('#pausePane').onclick=()=>{$('#pausePane').hidden=true;startCam();bumpIdle()};
+/* panduan mula & pusat bantuan */
+const TOUR=[['📸','Ambil gambar bergaya','Pilih ✨ Kesan, 🖼 Bingkai atau 💎 Cantik AI sebelum menekan butang pengatup. Leret skrin untuk tukar mod seperti Potret, Malam atau Photobooth.'],['🏆','Sertai 10 cabaran','Tekan 🏆 Cabaran di atas, pilih cabaran dan ambil gambar untuk kumpul bintang. Naik tahap hingga 💎 Platinum!'],['🌐','Kongsi & tonton bersama','Gambar masuk ke Galeri program secara automatik (boleh dimatikan). Tekan ❤️, kongsi melalui QR atau tonton siaran LIVE rakan.']];
+function showTour(){let k=0;const b=sheet('<div id="tourBox"></div>');const draw=()=>{const [i,h,p]=TOUR[k];$('#tourBox',b).innerHTML=`<div class="tour"><div class="ti">${i}</div><h2>${h}</h2><p>${p}</p><div class="dots">${TOUR.map((_,x)=>`<i class="${x===k?'on':''}"></i>`).join('')}</div><div class="row"><button class="btn grow" data-tr="skip">${k?'Kembali':'Langkau'}</button><button class="btn blue grow" data-tr="next">${k<TOUR.length-1?'Seterusnya':'Mula 📸'}</button></div></div>`};
+  b.addEventListener('click',e=>{const a=e.target.closest('[data-tr]')?.dataset.tr;if(!a)return;if(a==='next'){if(k<TOUR.length-1){k++;draw()}else{b.remove();S.tour=1;save()}}if(a==='skip'){if(k){k--;draw()}else{b.remove();S.tour=1;save()}}});draw()}
+const FAQ=[['Bagaimana ambil gambar?','Tekan butang kamera biru di tengah menu bawah, kemudian tekan butang bulat putih. Pilih Kesan, Bingkai atau Cantik AI di atas mod.'],['Kamera tidak keluar?','Benarkan akses kamera dalam pelayar. Jika dibuka melalui Google Sites, tekan “Buka skrin penuh”, atau gunakan butang “Ambil Gambar” (kamera telefon).'],['Bagaimana tukar program?','Imbas QR program menggunakan butang “📷 Imbas QR program” di tab QR, atau tukar nama program dalam Tetapan.'],['Adakah gambar saya dikongsi?','Ya jika suis “Kongsi automatik ke Galeri Awam” di Galeri dihidupkan. Matikan untuk simpan secara peribadi.'],['Bagaimana buang gambar dari Galeri Awam?','Buka gambar anda dan tekan “Tarik”. Hanya gambar yang dimuat naik dari peranti anda boleh ditarik.'],['Tersalah padam gambar?','Tekan “Buat asal” pada notifikasi dalam masa 5 saat.'],['Pasang seperti aplikasi?','iPhone: Safari → Kongsi → “Add to Home Screen”. Android: menu Chrome → “Install app”.'],['Perlukan bantuan lanjut?','Hubungi Pentadbir Lensa BPG: yahya.karim@moe.gov.my']];
+function helpSheet(){const b=sheet(`<h2>Pusat Bantuan</h2><p class="sub">Panduan ringkas BPG Kamera</p><div class="row" style="margin-bottom:6px"><button class="btn blue grow" data-h="tour">▶ Lihat panduan</button><button class="btn grow" data-h="scan">📷 Imbas QR</button></div><div class="faq">${FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${esc(a)}</p></details>`).join('')}</div>`);
+  b.addEventListener('click',e=>{const h=e.target.closest('[data-h]')?.dataset.h;if(h==='tour'){b.remove();showTour()}if(h==='scan'){b.remove();scanQR()}})}
+$('#ahHelp').onclick=helpSheet;
+/* notis versi baharu */
+function watchUpdates(reg){if(!reg)return;const ping=()=>{try{reg.update()}catch(e){}};setInterval(ping,30*60000);reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)toastAct('✨ Versi baharu BPG Kamera tersedia','Muat semula',()=>location.reload(),20000)})})}
+const UPG2=[['🎓','Panduan mula 3 langkah','Pengenalan ringkas untuk pengguna baharu'],['❓','Pusat Bantuan','Soalan lazim + akses pantas di menu atas'],['⚡','Pratonton pantas','Kongsi, sunting atau padam sejurus selepas ambil gambar'],['↩️','Buat asal','Pulihkan gambar yang tersalah padam dalam 5 saat'],['❤️','Ketik dua kali untuk suka','Seperti Instagram, dengan animasi hati'],['🔍','Cubit untuk zum','Zum & seret gambar dalam penonton'],['👇','Leret bawah untuk tutup','Tutup penonton gambar dengan satu leretan'],['🔄','Tarik untuk muat semula','Kemas kini galeri dengan menarik skrin ke bawah'],['✨','Pemuatan skeleton','Paparan memuat yang lancar'],['📴','Notis luar talian','Tahu bila gambar akan dihantar'],['📶','Bar kemajuan muat naik','Lihat status penghantaran gambar'],['🚫','Tarik dari Galeri Awam','Buang gambar anda daripada galeri program (PDPA)'],['🗜️','Muat turun ZIP','Semua gambar program dalam satu fail'],['📷','Imbas QR program','Tukar program terus dalam aplikasi'],['🔠','Teks besar','Mod mudah dibaca'],['🔔','Bip pemasa','Bunyi kira detik pemasa'],['🔋','Jimat bateri','Kamera dijeda automatik bila tidak digunakan'],['📡','Kualiti auto','Saiz gambar ikut kelajuan rangkaian'],['🆕','Notis versi baharu','Dimaklumkan bila aplikasi dikemas kini'],['🧭','Keadaan kosong mesra','Butang tindakan jelas bila tiada kandungan']];
+
 /* ================= NAVIGASI ================= */
 let cur='cam';
 function go(v){
   cur=v;document.body.classList.toggle('oncam',v==='cam');$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
-  if(v==='cam')startCam();else stopCam();
+  $('#pausePane').hidden=true;$('#qprev').hidden=true;if(v==='cam'){startCam();bumpIdle()}else stopCam();
   $('#gpsTag').hidden=v!=='cam'||!S.gps||!GPS.text;if(v==='cam')setTimeout(centerMode,30);
   if(v==='gal')setSeg(galSeg);if(v==='live'){renderLives();fetchLives()}if(v==='album')loadAlbum();if(v==='qr'){qrPrefill();drawQR()}if(v==='set')bindSettings();
   if(v!=='gal'&&selMode){selMode=false;sel.clear();$('#selbar').hidden=true}
@@ -2147,6 +2276,8 @@ document.addEventListener('dragover',e=>e.preventDefault());document.addEventLis
   buildFilterStrip();syncTools();bindSettings();netUI();
   await DB.open();PH=(await DB.all()).sort((a,b)=>b.t-a.t);await loadLogo();setLast();refreshStats();
   renderMe();applyRole();document.body.classList.add('oncam');setTimeout(centerMode,50);
+  if(!S.dev){S.dev=uid()+uid()+uid();save()}updOff();bumpIdle();
+  $('#upList2').innerHTML=UPG2.map(w=>`<div class="wow"><b>${w[0]}</b><div>${w[1]}<small>${w[2]}</small></div></div>`).join('');
   buildModes();buildFrameStrip();syncTools();syncAutoUp();$('#ahStars').textContent=chStars()+'★';setTimeout(fetchLives,1200);setTimeout(pollNew,4000);
   $('#upList').innerHTML=UPG.map(w=>`<div class="wow"><b>${w[0]}</b><div>${w[1]}<small>${w[2]}</small></div></div>`).join('');if(S.clap)clapOn(true);if(S.level)levelOn(true);
   $('#wowList').innerHTML=WOW.map(w=>`<div class="wow"><b>${w[0]}</b><div>${w[1]}<small>${w[2]}</small></div></div>`).join('');
@@ -2157,7 +2288,7 @@ document.addEventListener('dragover',e=>e.preventDefault());document.addEventLis
   if(S.gps)gpsOn(true);
   startCam();
   setTimeout(sync,1500);
-  try{if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
+  try{if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').then(watchUpdates).catch(()=>{})}catch(e){}
 })();
 </script>
 </body>
